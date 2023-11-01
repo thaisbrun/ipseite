@@ -1,7 +1,7 @@
 import collections
-
+import datetime
+from django.utils import timezone
 from django.db import models
-
 # Create your models here.
 
 """ Utilisateur """
@@ -11,7 +11,7 @@ class User(models.Model):
     firstName = models.CharField(max_length=50)
     lastName = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
-    tel = models.IntegerField(max_length=7)
+    tel = models.IntegerField()
     address = models.CharField(max_length=50)
     password = models.CharField(max_length=50)
 
@@ -20,7 +20,7 @@ class User(models.Model):
 
 
 class Order(models.Model):
-    quantity = models.IntegerField(max_length=5)
+    quantity = models.IntegerField()
     orderDate = models.DateField()
     totalPrice = models.FloatField(default=0.0)
     deliveryAddress = models.CharField(max_length=100)
@@ -34,7 +34,7 @@ class Order(models.Model):
 
 class Artist(models.Model):
     name = models.CharField(max_length=70)
-    createDate = models.DateField()
+    createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField(default=1)
 
 
@@ -43,7 +43,7 @@ class Artist(models.Model):
 
 class Band(models.Model):
     name = models.CharField(max_length=70)
-    createDate = models.DateField()
+    createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField(default=1)
     listArtists = []
 
@@ -52,9 +52,10 @@ class Band(models.Model):
 
 
 class Evenement(models.Model):
-    place = models.CharField(100)
-    createDate = models.DateField()
+    place = models.CharField(max_length=100)
+    createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField(default=1)
+    image = models.ImageField(upload_to="imagesEv", blank=True, null=True)
     listTickets = []
 
 """ Festival """
@@ -76,7 +77,7 @@ class Concert(Evenement):
 
 
 class Tour(models.Model):
-    name = models.CharField(100)
+    name = models.CharField(max_length=100)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     listConcerts = []
 
@@ -85,6 +86,6 @@ class Tour(models.Model):
 
 
 class Ticket(models.Model):
-    price = models.FloatField()
-    createDate = models.DateField()
+    price = models.FloatField(default=0.0)
+    createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField(default=1)
