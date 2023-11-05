@@ -24,7 +24,7 @@ class Order(models.Model):
     orderDate = models.DateField()
     totalPrice = models.FloatField(default=0.0)
     deliveryAddress = models.CharField(max_length=100)
-    activation = models.BinaryField(default=1)
+    activation = models.BinaryField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     listTickets = []
 
@@ -35,7 +35,10 @@ class Order(models.Model):
 class Artist(models.Model):
     name = models.CharField(max_length=70)
     createDate = models.DateField(default=timezone.now)
-    activation = models.BinaryField(default=1)
+    activation = models.BinaryField()
+
+    def __str__(self):
+       return self.name;
 
 
 """ Groupe """
@@ -44,9 +47,20 @@ class Artist(models.Model):
 class Band(models.Model):
     name = models.CharField(max_length=70)
     createDate = models.DateField(default=timezone.now)
-    activation = models.BinaryField(default=1)
+    activation = models.BinaryField()
     listArtists = []
+    def __str__(self):
+       return self.name;
 
+""" Tournée """
+
+
+class Tour(models.Model):
+    name = models.CharField(max_length=100)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    listConcerts = []
+    def __str__(self):
+       return self.name;
 
 """ Evenement """
 
@@ -54,7 +68,7 @@ class Band(models.Model):
 class Evenement(models.Model):
     place = models.CharField(max_length=100)
     createDate = models.DateField(default=timezone.now)
-    activation = models.BinaryField(default=1)
+    activation = models.BinaryField()
     image = models.ImageField(upload_to="imagesEv", blank=True, null=True)
     listTickets = []
 
@@ -73,19 +87,9 @@ class Concert(Evenement):
     date = models.DateField()
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
 
-""" Tournée """
-
-
-class Tour(models.Model):
-    name = models.CharField(max_length=100)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    listConcerts = []
-
-
 """ Place """
-
 
 class Ticket(models.Model):
     price = models.FloatField(default=0.0)
     createDate = models.DateField(default=timezone.now)
-    activation = models.BinaryField(default=1)
+    activation = models.BinaryField()
