@@ -36,7 +36,6 @@ class Artist(models.Model):
     name = models.CharField(max_length=70)
     createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
-
     def __str__(self):
        return self.name;
 
@@ -86,6 +85,7 @@ class Festival(Evenement):
 class Concert(Evenement):
     date = models.DateField()
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    tour = models.ForeignKey(Tour, on_delete=models.CASCADE)
 
 """ Place """
 

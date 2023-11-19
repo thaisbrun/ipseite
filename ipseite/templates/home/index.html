@@ -4,5 +4,9 @@
 {% for artist in artists %}
 <h2>{{artist.name}}</h2>
 {% endfor %}
+<h1>Liste des concerts</h1>
+{% for concert in concerts %}
+<img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}">
+{% endfor %}
 {% endblock %}
 
