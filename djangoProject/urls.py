@@ -19,9 +19,11 @@ from django.contrib import admin
 from django.urls import path, include
 
 from djangoProject import settings
+from ipseite.views import artist_detail
 
 urlpatterns = [
-path('admin/', admin.site.urls),
-path('', include('ipseite.urls')),
+                  path('admin/', admin.site.urls),
+                  path('', include('ipseite.urls')),
+                  path('artist/<str:slug>', artist_detail, name="artist"),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

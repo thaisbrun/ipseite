@@ -34,6 +34,7 @@ class Order(models.Model):
 
 class Artist(models.Model):
     name = models.CharField(max_length=70)
+    slug = models.SlugField(max_length=70)
     createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
     def __str__(self):
