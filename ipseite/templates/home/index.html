@@ -3,6 +3,7 @@
 <h1>Liste des artistes</h1>
 {% for artist in artists %}
 <h2>{{artist.name}}</h2>
+<a href="{% url 'artist' artist.slug %}">Voir artiste</a>
 {% endfor %}
 <h1>Liste des concerts</h1>
 {% for concert in concerts %}

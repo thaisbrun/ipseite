@@ -12,4 +12,4 @@ def index(request):
 
 def artist_detail(request, slug):
     artist = get_object_or_404(Artist, slug=slug)
-    return HttpResponse(f"{artist.name} {artist.createDate}")
+    return render(request, 'home/detail.html', context={"artist":artist});
