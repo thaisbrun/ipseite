@@ -2,25 +2,12 @@ import collections
 import datetime
 from django.utils import timezone
 from django.db import models
+
+from djangoProject.settings import AUTH_USER_MODEL
+
 # Create your models here.
 
-
-
-""" Commande """
-
-
-class Order(models.Model):
-    quantity = models.IntegerField()
-    orderDate = models.DateField()
-    totalPrice = models.FloatField(default=0.0)
-    deliveryAddress = models.CharField(max_length=100)
-    activation = models.BinaryField()
-    """user = models.ForeignKey(User, on_delete=models.CASCADE)"""
-    listTickets = []
-
-
 """ Artiste """
-
 
 class Artist(models.Model):
     name = models.CharField(max_length=70)
@@ -48,6 +35,7 @@ class Band(models.Model):
 class Tour(models.Model):
     name = models.CharField(max_length=100)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    description = models.CharField(max_length=50)
     listConcerts = []
     def __str__(self):
        return self.name;
@@ -68,6 +56,8 @@ class Evenement(models.Model):
 class Festival(Evenement):
     startDate = models.DateField()
     finishDate = models.DateField()
+    name = models.CharField(max_length=100)
+    description = models.CharField(max_length=200)
     listArtists = []
 
 """ Concert """
@@ -82,5 +72,20 @@ class Concert(Evenement):
 
 class Ticket(models.Model):
     price = models.FloatField(default=0.0)
+    emplacement = models.CharField(max_length=50)
     createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
+
+""" Commande """
+
+class Order(models.Model):
+    quantity = models.IntegerField(default=1)
+    orderDate = models.DateField()
+    totalPrice = models.FloatField(default=0.0)
+    deliveryAddress = models.CharField(max_length=100)
+    activation = models.BinaryField()
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
+    event = models.ForeignKey(Evenement, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.event.place} ({self.quantity})"

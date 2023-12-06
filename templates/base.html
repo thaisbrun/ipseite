@@ -29,6 +29,12 @@
         <a href="{% url 'signup' %}">
       <span class="navbar-text">
         Créer son compte
+      </span>
+        </a>
+            &nbsp;
+            <a href="{% url 'login' %}">
+      <span class="navbar-text">
+        Se connecter
       </span></a>
         {% else %}
             <a href="{% url 'logout' %}">
