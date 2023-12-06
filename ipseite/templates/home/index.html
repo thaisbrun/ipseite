@@ -6,9 +6,9 @@
 <h2>{{artist.name}}</h2>
 <a href="{% url 'artist' artist.slug %}">Voir artiste</a>
 {% endfor %} -->
-<h1>Liste des concerts</h1>
     <div class="container text-center">
   <div class="row align-items-start">
+      <h1>Liste des concerts</h1>
     {% for concert in concerts %}
       <div class="col">
           <h1>{{ concert.artist.name }}</h1>
@@ -16,6 +16,20 @@
           <p>{{ concert.date }}</p>
    <p>Emplacements dispos : fosse, place assise</p>
 <img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" width="150" height="160">
+    </div>
+      {% endfor %}
+      <br>
+        <h1>Liste des festivals</h1>
+    {% for festival in festivals %}
+      <div class="col">
+          <h1>Liste des 3 premiers artistes</h1>
+          <h2> {{ festival.name }} - {{ festival.place}}</h2>
+          {%for artist in festivals.artists %}
+          <p> {{ artist.name }} </p>
+          {% endfor %}
+          <p>Du {{ festival.startDate }} au {{ festival.finishDate }} </p>
+   <p>Emplacements dispos : fosse, place assise</p>
+<img src="{{ festival.image.url }}" width="150" height="160">
     </div>
       {% endfor %}
   </div>
