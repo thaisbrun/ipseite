@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from ipseite.models import Order, Artist, Band, Evenement, Festival, Concert, Tour, Ticket
+from ipseite.models import Order, Artist, Band, Evenement, Festival, Concert, Tour, Ticket, Cart
 
 # Register your models here.
 admin.site.register(Order)
@@ -11,3 +11,4 @@ admin.site.register(Festival)
 admin.site.register(Concert)
 admin.site.register(Tour)
 admin.site.register(Ticket)
+admin.site.register(Cart)

@@ -1,12 +1,25 @@
 {% extends 'base.html' %}
 {%  block content %}
-<h1>Liste des artistes</h1>
+<div class="container">
+<!--<h1>Liste des artistes</h1>
 {% for artist in artists %}
 <h2>{{artist.name}}</h2>
 <a href="{% url 'artist' artist.slug %}">Voir artiste</a>
-{% endfor %}
+{% endfor %} -->
 <h1>Liste des concerts</h1>
-{% for concert in concerts %}
-<img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}">
-{% endfor %}
+    <div class="container text-center">
+  <div class="row align-items-start">
+    {% for concert in concerts %}
+      <div class="col">
+          <h1>{{ concert.artist.name }}</h1>
+          <h2>{{ concert.tour.name }} - {{ concert.place}}</h2>
+          <p>{{ concert.date }}</p>
+   <p>Emplacements dispos : fosse, place assise</p>
+<img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" width="150" height="160">
+    </div>
+      {% endfor %}
+  </div>
+</div>
+<br>
+</div>
 {% endblock %}
