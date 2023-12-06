@@ -1,17 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>S'inscrire</h1>
+<div class="container">
+    <br>
+    <div class="row">
+        <br>
+        <br>
+<div class="card text-center">
+    <h5 class="card-header">Inscription</h5>
+  <div class="card-body">
+    <p class="card-text">
 <form method="POST" action="">
     {% csrf_token %}
-    <p>
-        <label for="username">Nom d'utilisateur</label>
-        <input id="username" name="username" type="text">
-    </p>
-        <p>
-        <label for="password">Mot de passe</label>
-        <input id="password" name="password" type="password">
-    </p>
-    <button type="submit">Valider l'inscription</button>
+      <div class="row">
+  <div class="col-3">
+        <label for="username" class="form-label">Pseudo : </label>
+  </div>
+      <div class="col-9">
+        <input id="username" name="username" type="text" class="form-control">
+  </div>
+      </div>
+      <br>
+            <div class="row">
+      <div class="col-3">
+        <label for="password" class="form-label">Mot de passe : </label>
+      </div>
+      <div class="col-9">
+        <input id="password" name="password" type="password" class="form-control">
+      </div>
+            </div>
+      <br>
+    <button type="submit" class="btn btn-info">Valider mon inscription</button>
 </form>
+  </div>
+</div>
+    </div>
+</div>
+<br>
 {% endblock %}

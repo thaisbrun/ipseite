@@ -13,3 +13,6 @@ def index(request):
 def artist_detail(request, slug):
     artist = get_object_or_404(Artist, slug=slug)
     return render(request, 'home/detail.html', context={"artist":artist});
+
+def add_to_cart(request):
+    pass

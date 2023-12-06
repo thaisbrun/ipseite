@@ -12,7 +12,6 @@ from djangoProject.settings import AUTH_USER_MODEL
 
 class Artist(models.Model):
     name = models.CharField(max_length=70)
-    slug = models.SlugField(max_length=70)
     createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
 
@@ -49,6 +48,7 @@ class Tour(models.Model):
 
 class Ticket(models.Model):
     price = models.FloatField(default=0.0)
+    slug = models.SlugField(max_length=70)
     emplacement = models.CharField(max_length=50)
     createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
@@ -59,6 +59,7 @@ class Ticket(models.Model):
 
 class Evenement(models.Model):
     place = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=70)
     createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
     image = models.ImageField(upload_to="imagesEv", blank=True, null=True)

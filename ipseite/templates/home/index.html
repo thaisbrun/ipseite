@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
 {%  block content %}
 <div class="container">
-<!--<h1>Liste des artistes</h1>
-{% for artist in artists %}
-<h2>{{artist.name}}</h2>
-<a href="{% url 'artist' artist.slug %}">Voir artiste</a>
-{% endfor %} -->
     <div class="container text-center">
   <div class="row align-items-start">
       <h1>Liste des concerts</h1>
@@ -24,7 +19,7 @@
       <div class="col">
           <h1>Liste des 3 premiers artistes</h1>
           <h2> {{ festival.name }} - {{ festival.place}}</h2>
-          {%for artist in festivals.artists %}
+          {%for artist in festival.artists.all %}
           <p> {{ artist.name }} </p>
           {% endfor %}
           <p>Du {{ festival.startDate }} au {{ festival.finishDate }} </p>
