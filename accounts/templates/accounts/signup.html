@@ -13,13 +13,40 @@
 <form method="POST" action="">
     {% csrf_token %}
       <div class="row">
+            <div class="col-3">
+        <label for="first_name" class="form-label">Prénom : </label>
+  </div>
+      <div class="col-9">
+        <input id="first_name" name="first_name" type="text" class="form-control">
+  </div>
+      </div>
+            <br>
+      <div class="row">
+            <div class="col-3">
+        <label for="last_name" class="form-label">Nom : </label>
+  </div>
+      <div class="col-9">
+        <input id="last_name" name="last_name" type="text" class="form-control">
+  </div>
+      </div>
+            <br>
+            <div class="row">
+            <div class="col-3">
+        <label for="email" class="form-label">Mail : </label>
+  </div>
+      <div class="col-9">
+        <input id="email" name="email" type="text" class="form-control">
+  </div>
+            </div>
+            <br>
+            <div class="row">
   <div class="col-3">
         <label for="username" class="form-label">Pseudo : </label>
   </div>
       <div class="col-9">
         <input id="username" name="username" type="text" class="form-control">
   </div>
-      </div>
+            </div>
       <br>
             <div class="row">
       <div class="col-3">

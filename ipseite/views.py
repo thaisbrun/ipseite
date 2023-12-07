@@ -16,3 +16,6 @@ def artist_detail(request, slug):
 
 def add_to_cart(request):
     pass
+
+def ml(request):
+    return render(request, 'home/mentionslegales.html')

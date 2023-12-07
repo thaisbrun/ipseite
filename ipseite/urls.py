@@ -6,5 +6,5 @@ from djangoProject import settings
 from . import views
 urlpatterns = [
     path('', views.index, name='index'),
-
+    path('mentionslegales', views.ml, name='mentionslegales')
 ]

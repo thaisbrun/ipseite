@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+{% if user.is_authenticated %}
+    <form method="POST">
+            {% csrf_token %}
+  <div class="form-group">
+    <label for="first_name">Prénom</label>
+    <input type="text" class="form-control" name="first_name" id="first_name" value="{{ user.first_name }}">
+  </div>
+  <div class="form-group">
+    <label for="last_name">Nom</label>
+    <input type="text" class="form-control" name="last_name" id="last_name" value="{{ user.last_name }}">
+  </div>
+          <div class="form-group">
+    <label for="last_name">Mail</label>
+    <input type="email" class="form-control" name="email" id="email" value="{{ user.email }}">
+  </div>
+        <div class="form-group">
+        <label for="username" class="form-label">Pseudo : </label>
+        <input id="username" name="username" type="text" class="form-control" value="{{ user.username }}">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Modifier mon profil </button>
+</form>
+</div>
+{%endif %}
+{% endblock %}
