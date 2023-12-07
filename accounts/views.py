@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model, login, logout, authenticate
 
+from ipseite.models import Order
+
 User = get_user_model()
 
 def signup(request):
@@ -28,7 +30,8 @@ def login_user(request):
     return render(request, 'accounts/login.html')
 
 def my_account(request):
-        return render(request,'accounts/my_account.html')
+        orders = Order.objects.filter(User.objects.get("user_id"))
+        return render(request,'accounts/my_account.html', context={"orders":orders})
 def logout_user(request):
     logout(request)
     return redirect('index')
