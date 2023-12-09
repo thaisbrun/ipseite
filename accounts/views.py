@@ -44,3 +44,7 @@ def my_account(request):
 def logout_user(request):
     logout(request)
     return redirect('index')
+
+def delete_user(request):
+    User.objects.filter(id=request.user.id).delete()
+    return redirect('login')
