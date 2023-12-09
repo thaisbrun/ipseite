@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
 {% if user.is_authenticated %}
-    <form method="POST">
+    <form method="POST" action="">
             {% csrf_token %}
   <div class="form-group">
     <label for="first_name">Prénom</label>
@@ -23,6 +23,7 @@
   </div>
 
   <button type="submit" class="btn btn-primary">Modifier mon profil </button>
+
 </form>
 </div>
 {%endif %}

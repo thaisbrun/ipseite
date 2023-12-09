@@ -1,6 +1,8 @@
+from django.contrib.auth.base_user import AbstractBaseUser
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model, login, logout, authenticate
 
+from accounts.models import Shopper
 from ipseite.models import Order
 
 User = get_user_model()
@@ -30,8 +32,15 @@ def login_user(request):
     return render(request, 'accounts/login.html')
 
 def my_account(request):
-        orders = Order.objects.filter(User.objects.get("user_id"))
-        return render(request,'accounts/my_account.html', context={"orders":orders})
+    if request.method == "POST" :
+        first_name = request.POST.get("first_name")
+        last_name = request.POST.get("last_name")
+        email = request.POST.get("email")
+        username = request.POST.get("username")
+        orders = Order.objects.filter(User.objects.get(id=request.user.id))
+        User.objects.filter(id=request.user.id).update(first_name=first_name, last_name=last_name, email=email, username=username)
+        return redirect('index')
+    return render(request,'accounts/my_account.html')
 def logout_user(request):
     logout(request)
     return redirect('index')
