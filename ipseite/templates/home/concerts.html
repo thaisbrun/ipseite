@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
 {%  block content %}
 <p>Page des concerts</p>
+{% for concert in concerts %}
+<h1> {{ concert.place }} </h1>
+{% endfor %}
 {% endblock %}

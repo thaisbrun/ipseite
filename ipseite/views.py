@@ -25,7 +25,9 @@ def ml(request):
     return render(request, 'home/mentionslegales.html')
 
 def concerts(request):
-    return render(request, 'home/concerts.html')
+    concerts = Concert.objects.all()
+    return render(request, 'home/concerts.html', context={"concerts": concerts})
 
 def festivals(request):
-    return render(request, 'home/festivals.html')
+    festivals = Festival.objects.all()
+    return render(request, 'home/festivals.html', context={"festivals": festivals})

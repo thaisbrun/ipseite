@@ -7,8 +7,8 @@
       <h1>Liste des concerts</h1>
     {% for concert in concerts %}
       <div class="col">
-          <a href="{% url 'event_detail' concert.slug %}"> <h1>{{ concert.artist.name }}</h1></a>
-          <h2>{{ concert.tour.name }} - {{ concert.place}}</h2>
+          <h1>{{ concert.artist.name }}</h1>
+          <a href="{% url 'event_detail' concert.slug %}"><h2>{{ concert.tour.name }} - {{ concert.place}}</h2></a>
           <p>{{ concert.date }}</p>
    <p>Emplacements dispos : fosse, place assise</p>
 <img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" width="150" height="160">
@@ -19,7 +19,7 @@
     {% for festival in festivals %}
       <div class="col">
           <h1>Liste des 3 premiers artistes</h1>
-          <a href="{% url 'event_detail' festival.slug %}"><h2> {{ festival.name }} </h2></a> <h2> - {{ festival.place}}</h2>
+          <a href="{% url 'event_detail' festival.slug %}"><h2> {{ festival.name }} - {{ festival.place}}</h2></a>
           {%for artist in festival.artists.all %}
           <p> {{ artist.name }} </p>
           {% endfor %}
