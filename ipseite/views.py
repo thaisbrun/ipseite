@@ -23,3 +23,9 @@ def add_to_cart(request):
 
 def ml(request):
     return render(request, 'home/mentionslegales.html')
+
+def concerts(request):
+    return render(request, 'home/concerts.html')
+
+def festivals(request):
+    return render(request, 'home/festivals.html')
