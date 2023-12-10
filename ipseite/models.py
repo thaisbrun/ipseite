@@ -43,19 +43,18 @@ class Tour(models.Model):
     def __str__(self):
         return self.name;
 
-""" Place """
 
+
+
+""" Ticket """
 
 class Ticket(models.Model):
     price = models.FloatField(default=0.0)
-    slug = models.SlugField(max_length=70)
     emplacement = models.CharField(max_length=50)
     createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
 
-
 """ Evenement """
-
 
 class Evenement(models.Model):
     place = models.CharField(max_length=100)
@@ -64,7 +63,6 @@ class Evenement(models.Model):
     activation = models.BinaryField()
     image = models.ImageField(upload_to="imagesEv", blank=True, null=True)
     tickets = models.ManyToManyField(Ticket)
-
 
 """ Festival """
 

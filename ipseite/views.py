@@ -1,15 +1,16 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from ipseite.models import Artist, Concert, Festival, Evenement
+from ipseite.models import Artist, Concert, Festival, Evenement, Ticket
 
 
 # Create your views here.
 def index(request):
     artists = Artist.objects.all()
+    evenements = Evenement.objects.all()
     concerts = Concert.objects.all()
     festivals = Festival.objects.all()
     return render(request, 'home/index.html',
-                  context={"artists": artists, "concerts": concerts, "festivals": festivals})
+                  context={"artists": artists, "concerts": concerts, "festivals": festivals, "evenements": evenements})
 
 
 def event_detail(request, slug):

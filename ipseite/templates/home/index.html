@@ -4,6 +4,14 @@
 <div class="container">
     <div class="container text-center">
   <div class="row align-items-start">
+      <p>Bientôt complet </p>
+      {% for evenement in evenements %}
+      {% if evenement.tickets.count <= 10 %}
+      <p> {{ evenement.place }} </p>
+      {% else %}
+
+      {% endif %}
+      {% endfor %}
       <h1>Liste des concerts</h1>
     {% for concert in concerts %}
       <div class="col">
