@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from ipseite.models import Artist, Concert, Festival, Evenement, Ticket
+from ipseite.models import Artist, Concert, Festival, Evenement, Ticket, Cart, Order
 
 
 # Create your views here.
@@ -18,10 +18,18 @@ def event_detail(request, slug):
     return render(request, 'home/detail.html', context={"evenement": event})
 
 
-def add_to_cart(request):
-    pass
+def add_to_cart(request, slug):
+    user = request.user
+    event = get_object_or_404(Evenement, slug=slug)
+    cart, _ = Cart.objects.get_or_create(user=user)
+    order, created = Order.objects.get_or_create(user=user, event=event)
 
-
+    if created:
+        cart.orders.add(order)
+        cart.save()
+    else:
+        order.quantity += 1
+        order.save()
 def ml(request):
     return render(request, 'home/mentionslegales.html')
 

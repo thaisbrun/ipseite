@@ -18,6 +18,6 @@ urlpatterns = [
                   path('festivals', festivals, name="festivals"),
                   path('', include('ipseite.urls')),
                   path('event/<str:slug>', event_detail, name="event_detail"),
-                  path('ticket/<str:slug>/add-to-cart/', add_to_cart, name="add-to-cart"),
+                  path('evenement/<str:slug>/add-to-cart/', add_to_cart, name="add-to-cart"),
 
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
