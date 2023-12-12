@@ -1,5 +1,7 @@
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+
 from ipseite.models import Artist, Concert, Festival, Evenement, Ticket, Cart, Order
 
 
@@ -19,8 +21,11 @@ def event_detail(request, slug):
 
 
 def add_to_cart(request, slug):
+    """ Récupération de l'utilisateur """
     user = request.user
+    """ Récupération de l'evenement """
     event = get_object_or_404(Evenement, slug=slug)
+    """Récupération ou création du panier """
     cart, _ = Cart.objects.get_or_create(user=user)
     order, created = Order.objects.get_or_create(user=user, event=event)
 
@@ -30,6 +35,8 @@ def add_to_cart(request, slug):
     else:
         order.quantity += 1
         order.save()
+
+    return redirect(reverse("event_detail", kwargs={"slug":slug}))
 def ml(request):
     return render(request, 'home/mentionslegales.html')
 
