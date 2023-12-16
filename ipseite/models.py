@@ -16,7 +16,7 @@ class Artist(models.Model):
     activation = models.BinaryField()
 
     def __str__(self):
-        return self.name;
+        return self.name
 
 
 """ Groupe """
@@ -29,7 +29,7 @@ class Band(models.Model):
     artists = models.ManyToManyField(Artist)
 
     def __str__(self):
-        return self.name;
+        return self.name
 
 
 """ Tournée """
@@ -41,7 +41,7 @@ class Tour(models.Model):
     description = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name;
+        return self.name
 
 
 
