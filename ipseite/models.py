@@ -91,7 +91,8 @@ class Order(models.Model):
     quantity = models.IntegerField(default=1)
     totalPrice = models.FloatField(default=0.0)
     deliveryAddress = models.CharField(max_length=100)
-    ordered = models.BooleanField(default=True)
+    ordered = models.BooleanField(default=False)
+    orderDate = models.DateField(blank=True, null=True)
     activation = models.BinaryField()
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     event = models.ForeignKey(Evenement, on_delete=models.CASCADE)
@@ -106,8 +107,6 @@ class Order(models.Model):
 class Cart(models.Model):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
     orders = models.ManyToManyField(Order)
-    ordered = models.BooleanField(default=False)
-    orderDate = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username
