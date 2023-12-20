@@ -3,5 +3,6 @@
 {% block content %}
 {% for order in orders %}
 <p>{{ order.event.place }} {{order.quantity }} {{order.totalPrice }}</p>
-{% endfor %}
+
+{% endfor %}<a href="{% url 'delete_cart' %}"> Supprimer mon panier </a>
 {% endblock %}

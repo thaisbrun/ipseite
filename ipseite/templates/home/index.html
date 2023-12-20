@@ -26,7 +26,8 @@
   <div class="row align-items-start">
       <p>Bientôt complet </p>
       {% for evenement in evenements %}
-      {% if evenement.num_tickets < 10 %}
+      {{ evenement.tickets.count}}
+      {% if evenement.tickets.count > 10 %}
       <p> {{ evenement.place }} </p>
       {% else %}
 
