@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
@@ -47,3 +48,7 @@ def concerts(request):
 def festivals(request):
     festivals = Festival.objects.all().order_by('startDate')
     return render(request, 'home/festivals.html', context={"festivals": festivals})
+
+def cart(request):
+    cart = get_object_or_404(Cart, user=request.user)
+    return render(request, 'home/cart.html', context={"orders":cart.orders.all()})
