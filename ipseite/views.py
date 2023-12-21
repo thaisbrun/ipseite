@@ -28,7 +28,7 @@ def add_to_cart(request, slug):
     event = get_object_or_404(Evenement, slug=slug)
     """Récupération ou création du panier """
     cart, _ = Cart.objects.get_or_create(user=user)
-    order, created = Order.objects.get_or_create(user=user, event=event)
+    order, created = Order.objects.get_or_create(user=user, ordered=False, event=event)
 
     if created:
         cart.orders.add(order)
@@ -55,6 +55,5 @@ def cart(request):
 
 def delete_cart(request):
     if cart := request.user.cart:
-        cart.orders.all().delete()
         cart.delete()
     return redirect('index')
