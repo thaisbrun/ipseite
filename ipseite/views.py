@@ -50,8 +50,11 @@ def festivals(request):
     return render(request, 'home/festivals.html', context={"festivals": festivals})
 
 def cart(request):
-    cart = get_object_or_404(Cart, user=request.user)
-    return render(request, 'home/cart.html', context={"orders":cart.orders.all()})
+    if request.user is None:
+        cart = get_object_or_404(Cart, user=request.user)
+        return render(request, 'home/cart.html', context={"orders": cart.orders.all()})
+    else:
+        return render(request, 'accounts/login.html')
 
 def delete_cart(request):
     if cart := request.user.cart:

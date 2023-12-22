@@ -5,6 +5,7 @@
 {% if user.is_authenticated %}
     <form method="POST" action="">
             {% csrf_token %}
+        <h1 class="text-center"> Mes informations de profil </h1>
   <div class="form-group">
     <label for="first_name">Prénom</label>
     <input type="text" class="form-control" name="first_name" id="first_name" value="{{ user.first_name }}">
@@ -21,10 +22,12 @@
         <label for="username" class="form-label">Pseudo : </label>
         <input id="username" name="username" type="text" class="form-control" value="{{ user.username }}">
   </div>
-
-  <button type="submit" class="btn btn-primary">Modifier mon profil </button>
-      <a href="{% url 'delete_user' %}" class="btn btn-warning">Supprimer mon profil </a>
-</form>
+<br>
+  <button type="submit" class="btn btn-dark">Modifier mon profil </button>
+      <a href="{% url 'delete_user' %}" class="btn btn-danger">Supprimer mon profil </a>
+<br>
+    </form>
 </div>
+<br>
 {%endif %}
 {% endblock %}
