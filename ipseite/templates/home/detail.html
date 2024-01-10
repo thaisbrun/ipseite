@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{evenement.name}}</h2>
+<!-- Image de l'évenement, nom artiste, nomConcert, dateConcert, lieuConcert, Description du concert,
+list des emplacements dispo, prix -->
 <h2>Date de création : {{evenement.createDate}}</h2>
 <a href="{% url 'add-to-cart' evenement.slug %}" class="btn btn-outline-primary">Ajouter au panier</a>
 {% endblock %}
