@@ -21,9 +21,31 @@
         <div class="form-group">
         <label for="username" class="form-label">Pseudo : </label>
         <input id="username" name="username" type="text" class="form-control" value="{{ user.username }}">
-  </div>
+
+        </div>
 <br>
   <button type="submit" class="btn btn-dark">Modifier mon profil </button>
+
+        <h2> Mes dernières commandes : </h2>
+        {% for order in orders %}
+        <p> <b>Commande n°{{order.id}}</b>
+            <br>
+            Passée le : {{ order.orderDate }}
+            <br>
+        Envoyée à l'adresse : {{ order.user.email }}
+            <br>
+        Quantité : {{ order.quantity }}
+            <br>
+            Total : {{ order.price }}
+            <br>
+            Lieu : {{order.event.place}}
+            <br>
+            <br>
+            <img src="{{ order.event.image.url }}" width="150" height="160">
+            <br>
+        </p>
+        {% endfor %}
+        <!-- Rajouter les orders de l'utilisateur -->
       <a href="{% url 'delete_user' %}" class="btn btn-danger">Supprimer mon profil </a>
 <br>
     </form>

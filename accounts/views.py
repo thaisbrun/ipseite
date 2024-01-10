@@ -37,10 +37,12 @@ def my_account(request):
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
         username = request.POST.get("username")
-        orders = Order.objects.filter(User.objects.get(id=request.user.id))
         User.objects.filter(id=request.user.id).update(first_name=first_name, last_name=last_name, email=email, username=username)
         return redirect('index')
-    return render(request,'accounts/my_account.html')
+
+    orders = Order.objects.filter(user=request.user)
+
+    return render(request,'accounts/my_account.html',context={"orders": orders})
 def logout_user(request):
     logout(request)
     return redirect('index')
