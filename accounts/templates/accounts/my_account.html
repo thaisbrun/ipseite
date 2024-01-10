@@ -6,28 +6,40 @@
     <form method="POST" action="">
             {% csrf_token %}
         <h1 class="text-center"> Mes informations de profil </h1>
-  <div class="form-group">
-    <label for="first_name">Prénom</label>
+        <br>
+          <div class="row">
+    <div class="col">
+        <label for="first_name">Prénom</label>
     <input type="text" class="form-control" name="first_name" id="first_name" value="{{ user.first_name }}">
-  </div>
-  <div class="form-group">
+    </div>
+       <div class="col">
     <label for="last_name">Nom</label>
     <input type="text" class="form-control" name="last_name" id="last_name" value="{{ user.last_name }}">
   </div>
-          <div class="form-group">
+          <div class="col">
     <label for="last_name">Mail</label>
     <input type="email" class="form-control" name="email" id="email" value="{{ user.email }}">
   </div>
-        <div class="form-group">
+        <div class="col">
         <label for="username" class="form-label">Pseudo : </label>
         <input id="username" name="username" type="text" class="form-control" value="{{ user.username }}">
-
         </div>
+          </div>
 <br>
-  <button type="submit" class="btn btn-dark">Modifier mon profil </button>
+  <button type="submit" class="btn btn-dark" style="margin-bottom: 20px">Modifier mon profil </button>
 
-        <h2> Mes dernières commandes : </h2>
+  <div class="row">
+    <div class="col-9">
+    </div>
+    <div class="col-3">
+      <a href="{% url 'delete_user' %}"class="link-opacity-50">Supprimer mon profil </a>
+    </div>
+  </div>
+        <div class="row">
+      <h3> Mes dernières commandes : </h3>
+              <br>
         {% for order in orders %}
+    <div class="col">
         <p> <b>Commande n°{{order.id}}</b>
             <br>
             Passée le : {{ order.orderDate }}
@@ -40,13 +52,17 @@
             <br>
             Lieu : {{order.event.place}}
             <br>
+        </p>
+    </div>
+    <div class="col">
             <br>
             <img src="{{ order.event.image.url }}" width="150" height="160">
             <br>
-        </p>
+    </div>
         {% endfor %}
-        <!-- Rajouter les orders de l'utilisateur -->
-      <a href="{% url 'delete_user' %}" class="btn btn-danger">Supprimer mon profil </a>
+          </div>
+        <br>
+
 <br>
     </form>
 </div>
