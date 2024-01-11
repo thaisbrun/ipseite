@@ -9,7 +9,6 @@ from djangoProject.settings import AUTH_USER_MODEL
 
 """ Artiste """
 
-
 class Artist(models.Model):
     name = models.CharField(max_length=70)
     createDate = models.DateField(default=timezone.now)
@@ -20,7 +19,6 @@ class Artist(models.Model):
 
 
 """ Groupe """
-
 
 class Band(models.Model):
     name = models.CharField(max_length=70)
@@ -34,7 +32,6 @@ class Band(models.Model):
 
 """ Tournée """
 
-
 class Tour(models.Model):
     name = models.CharField(max_length=100)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
@@ -42,17 +39,6 @@ class Tour(models.Model):
 
     def __str__(self):
         return self.name
-
-
-
-
-""" Ticket """
-
-class Ticket(models.Model):
-    price = models.FloatField(default=0.0)
-    emplacement = models.CharField(max_length=50)
-    createDate = models.DateField(default=timezone.now)
-    activation = models.BinaryField()
 
 """ Evenement """
 
@@ -62,30 +48,41 @@ class Evenement(models.Model):
     createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
     image = models.ImageField(upload_to="imagesEv", blank=True, null=True)
-    tickets = models.ManyToManyField(Ticket)
+    nbTickets = models.IntegerField(default=1)
+
+""" Emplacement """
+class Emplacement(models.Model):
+    name = models.CharField(max_length=40)
+    dateCreation = models.DateField(default=timezone.now)
+
+    def __str__(self):
+        return self.name
+
+""" Ticket """
+class Ticket(models.Model):
+    price = models.FloatField(default=0.0)
+    emplacement = models.ForeignKey(Emplacement, on_delete=models.CASCADE)
+    createDate = models.DateField(default=timezone.now)
+    activation = models.BinaryField()
+    event = models.ForeignKey(Evenement, on_delete=models.CASCADE)
 
 """ Festival """
-
-
 class Festival(Evenement):
-    startDate = models.DateField()
-    finishDate = models.DateField()
+    startDate = models.DateField(default=timezone.now)
+    finishDate = models.DateField(default=timezone.now)
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=200)
     artists = models.ManyToManyField(Artist)
 
-
 """ Concert """
 
-
 class Concert(Evenement):
-    date = models.DateField()
+    date = models.DateField(default=timezone.now)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     tour = models.ForeignKey(Tour, on_delete=models.CASCADE)
 
 
 """ Commande """
-
 
 class Order(models.Model):
     quantity = models.IntegerField(default=1)
@@ -101,7 +98,6 @@ class Order(models.Model):
 
 
 """ Panier """
-
 
 class Cart(models.Model):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)

@@ -27,7 +27,7 @@
       <p>Bientôt complet </p>
       {% for evenement in evenements %}
       {{ evenement.tickets.count}}
-      {% if evenement.tickets.count > 10 %}
+      {% if evenement.nbTickets < 10 %}
       <p> {{ evenement.place }} </p>
       {% else %}
 

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
-from ipseite.models import Artist, Concert, Festival, Evenement, Ticket, Cart, Order
+from ipseite.models import Artist, Concert, Festival, Evenement, Ticket, Cart, Order, Emplacement
 
 
 # Create your views here.
@@ -18,7 +18,8 @@ def index(request):
 
 def event_detail(request, slug):
     event = get_object_or_404(Evenement, slug=slug)
-    return render(request, 'home/detail.html', context={"evenement": event})
+    emplacements = Emplacement.objects.all()
+    return render(request, 'home/detail.html', context={"evenement": event, "emplacements": emplacements})
 
 
 def add_to_cart(request, slug):
@@ -50,7 +51,7 @@ def festivals(request):
     return render(request, 'home/festivals.html', context={"festivals": festivals})
 
 def cart(request):
-    if request.user is None:
+    if request.user is not None:
         cart = get_object_or_404(Cart, user=request.user)
         return render(request, 'home/cart.html', context={"orders": cart.orders.all()})
     else:
