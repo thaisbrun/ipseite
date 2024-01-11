@@ -19,7 +19,15 @@ def index(request):
 def event_detail(request, slug):
     event = get_object_or_404(Evenement, slug=slug)
     emplacements = Emplacement.objects.all()
-    return render(request, 'home/detail.html', context={"evenement": event, "emplacements": emplacements})
+    festivals = Festival.objects.all()
+    concerts = Concert.objects.all()
+    for concert in concerts:
+        if event.id == concert.id:
+            return render(request, 'home/detail.html', context={"evenement": concert, "emplacements": emplacements})
+    for festival in festivals:
+        if event.id == festival.id:
+            return render(request, 'home/detail.html', context={"evenement": festival, "emplacements": emplacements})
+
 
 
 def add_to_cart(request, slug):
