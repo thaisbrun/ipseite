@@ -3,18 +3,32 @@
 {% block content %}
 <!-- Image de l'évenement, nom artiste, nomConcert, dateConcert, lieuConcert, Description du concert,
 list des emplacements dispo, prix -->
-<div class="container text-center">
+<div class="container">
   <div class="row">
-    <div class="col">
-<img src="{{ evenement.image.url }}" width="150" height="160">
+    <div class="col-4">
+        <br>
+<img src="{{ evenement.image.url }}" width="250" height="260">
     </div>
-    <div class="col">
-    <p>{{evenement.artist.name }}</p>
+    <div class="col-8">
+        <br>
+    <h1><b>{{evenement.artist.name }}</b></h1>
         {% for artist in evenement.artists.all %}
-        <p> {{ artist.name }}</p>
+      <h1><b>   {{ artist.name }}</b></h1>
         {%endfor%}
+        <h2><i>Le {{evenement.date }} {{ evenement.startDate }} à {{ evenement.place }} </i></h2>
+        <p>{{ evenement.description }}</p>
+        <select class="form-select" style="width: 200px;">
+          {% for emplacement in emplacements %}
+              <option value="{{emplacement.id}}">{{ emplacement.name }}</option>
+          {% endfor %}
+        </select>
+        <b>... euros </b>
+        <!-- Quand je sélectionne un emplacement : le prix du ticket correspondant à cet evenement et cet emplacement se met en ligne -->
+        <br>
+        <br>
+        <a href="{% url 'add-to-cart' evenement.slug %}" class="btn btn-outline-primary">Ajouter au panier</a>
+
     </div>
   </div>
-<a href="{% url 'add-to-cart' evenement.slug %}" class="btn btn-outline-primary">Ajouter au panier</a>
-{% endblock %}
 </div>
+{% endblock %}

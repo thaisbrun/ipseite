@@ -22,17 +22,22 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-    <div class="container text-center">
+    <div class="container">
   <div class="row align-items-start">
-      <p>Bientôt complet </p>
-      {% for evenement in evenements %}
+      <h3><i>Bientôt complet</i></h3>{% for evenement in evenements %}
       {{ evenement.tickets.count}}
       {% if evenement.nbTickets < 10 %}
-      <p> {{ evenement.place }} </p>
-      {% else %}
-
+      <div class="card" style="width: 18rem;">
+  <img src="..." class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ evenement.artist.name }}</h5>
+    <p class="card-text">{{evenement.description}}</p>
+    <a href="#" class="btn btn-primary">Ajouter au panier</a>
+  </div>
+</div>{% else %}
       {% endif %}
       {% endfor %}
+
       <h1>Liste des concerts</h1>
     {% for concert in concerts %}
       <div class="col">
