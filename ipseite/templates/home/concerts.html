@@ -8,7 +8,7 @@
     <h5 class="card-title">{{ concert.artist.name }} - {{concert.tour.name }}</h5>
     <p class="card-text"> Concert à {{ concert.place }} le {{concert.date }} <br>
     Emplacements dispos : {%for emplacement in emplacements %}
-        {{emplacement.name}}
+        {{emplacement.name}},
         {% endfor %}
     </p>
     <a href="#" class="btn btn-primary">Ca m'intéresse</a>
