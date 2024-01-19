@@ -52,15 +52,19 @@ def ml(request):
 
 def concerts(request):
     concerts = Concert.objects.all().order_by('date')
-    return render(request, 'home/concerts.html', context={"concerts": concerts})
+    emplacements = Emplacement.objects.all().order_by('name')
+    return render(request, 'home/concerts.html', context={"concerts": concerts, "emplacements":emplacements})
 
 def festivals(request):
     festivals = Festival.objects.all().order_by('startDate')
     return render(request, 'home/festivals.html', context={"festivals": festivals})
 
 def cart(request):
+    try:
+        cart = Cart.objects.get(id=request.user.cart.id)
+    except Cart.DoesNotExist:
+        return render(request,'home/cart.html')
     if request.user is not None:
-        cart = get_object_or_404(Cart, user=request.user)
         return render(request, 'home/cart.html', context={"orders": cart.orders.all()})
     else:
         return render(request, 'accounts/login.html')

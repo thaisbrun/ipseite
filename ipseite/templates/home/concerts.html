@@ -2,6 +2,17 @@
 {%  block content %}
 <p>Page des concerts</p>
 {% for concert in concerts %}
-<h1> {{ concert.place }} </h1>
+<div class="card" style="width: 18rem;">
+  <img src="{{ concert.image }}" class="card-img-top">
+  <div class="card-body">
+    <h5 class="card-title">{{ concert.artist.name }} - {{concert.tour.name }}</h5>
+    <p class="card-text"> Concert à {{ concert.place }} le {{concert.date }} <br>
+    Emplacements dispos : {%for emplacement in emplacements %}
+        {{emplacement.name}}
+        {% endfor %}
+    </p>
+    <a href="#" class="btn btn-primary">Ca m'intéresse</a>
+  </div>
+</div>
 {% endfor %}
 {% endblock %}

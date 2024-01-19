@@ -11,10 +11,10 @@ list des emplacements dispo, prix -->
     </div>
     <div class="col-8">
         <br>
-    <h1><b>{{evenement.artist.name }}</b></h1>
-        {% for artist in evenement.artists.all %}
-      <h1><b>   {{ artist.name }}</b></h1>
-        {%endfor%}
+    <h2><b>{{evenement.artist.name }}</b></h2>
+        <h2><b>{% for artist in evenement.artists.all %}
+      {{ artist.name }} -
+        {%endfor%}</b></h2>
         <h2><i>Le {{evenement.date }} {{ evenement.startDate }} à {{ evenement.place }} </i></h2>
         <p>{{ evenement.description }}</p>
         <select class="form-select" style="width: 200px;">
