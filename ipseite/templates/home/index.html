@@ -4,13 +4,13 @@
 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="./media/carousel1.jpg" class="d-block w-100" height="300">
+      <img src="./media/carousel1.png" class="d-block w-100">
     </div>
     <div class="carousel-item">
-      <img src="./media/carousel2.jpg" class="d-block w-100" height="300">
+      <img src="./media/carousel2.png" class="d-block w-100">
     </div>
     <div class="carousel-item">
-      <img src="./media/carousel3.jpg" class="d-block w-100" height="300">
+      <img src="./media/carousel3.jpg" class="d-block w-100">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -30,7 +30,7 @@
       {% for concert in concerts %}
       {% if concert.nbTickets < 10 %}
       <div class="card" style="width: 20rem; margin:10px; border-color: cornflowerblue;">
-<img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" style="margin-top: 10px">
+          <img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" style="margin-top: 10px">
   <div class="card-body">
       <a href="{% url 'event_detail' concert.slug %}"><h5 class="card-title">{{ concert.artist.name }} à {{concert.place }} </h5></a>
       <p class="card-text"><i>Le {{concert.date }}</i></p>
@@ -53,32 +53,39 @@
 </div>{% else %}
       {% endif %}
       {% endfor %}
-
-      <h1>Liste des concerts</h1>
+  </div>
+        <br>
+        <div class="text-center">
+      <h3>Les concerts</h3>
+        </div>
+          <div class="row align-items-start">
     {% for concert in concerts %}
-      <div class="col">
-          <h1>{{ concert.artist.name }}</h1>
-          <a href="{% url 'event_detail' concert.slug %}"><h2>{{ concert.tour.name }} - {{ concert.place}}</h2></a>
-          <p>{{ concert.date }}</p>
-   <p>Emplacements dispos : fosse, place assise</p>
-<img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" width="150" height="160">
-    </div>
+      <div class="card" style="width: 20rem; margin:10px; border-color: cornflowerblue;">
+<img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" style="margin-top: 10px">
+  <div class="card-body">
+      <a href="{% url 'event_detail' concert.slug %}"><h5 class="card-title">{{ concert.artist.name }} à {{concert.place }} </h5></a>
+      <p class="card-text"><i>Le {{concert.date }}</i></p>
+      <p class="card-text">{{concert.description}}</p>
+  </div>
+      </div>
       {% endfor %}
-      <br>
-        <h1>Liste des festivals</h1>
+      </div><br>
+        <div class="text-center">
+      <h3>Les festivals</h3></div>
+                  <div class="row align-items-start">
     {% for festival in festivals %}
-      <div class="col">
-          <h1>Liste des 3 premiers artistes</h1>
-          <a href="{% url 'event_detail' festival.slug %}"><h2> {{ festival.name }} - {{ festival.place}}</h2></a>
-          {%for artist in festival.artists.all %}
-          <p> {{ artist.name }} </p>
-          {% endfor %}
-          <p>Du {{ festival.startDate }} au {{ festival.finishDate }} </p>
-   <p>Emplacements dispos : fosse, place assise</p>
-<img src="{{ festival.image.url }}" width="150" height="160">
-    </div>
-      {% endfor %}
+      <div class="card" style="width: 20rem; margin:10px; border-color: cornflowerblue;">
+<img src="{{ festival.image.url }}" alt="{{ festival.place }}" style="margin-top: 10px" >
+  <div class="card-body">
+    <a href="{% url 'event_detail' festival.slug %}">  <h5 class="card-title">
+                    {%for artist in festival.artists.all %}
+        {{ artist.name }}, {%endfor%} à {{festival.place }} </h5></a>
+            <p class="card-text"><i>Du {{festival.startDate }} au {{ festival.finishDate }}</i></p>
+      <p class="card-text">{{festival.description}}</p>
   </div>
 </div>
+      {% endfor %}
+                  </div>
 <br>
+    </div>
 {% endblock %}
