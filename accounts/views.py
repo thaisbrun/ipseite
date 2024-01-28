@@ -40,7 +40,7 @@ def my_account(request):
         User.objects.filter(id=request.user.id).update(first_name=first_name, last_name=last_name, email=email, username=username)
         return redirect('index')
 
-    orders = Order.objects.filter(user=request.user)
+    orders = Order.objects.filter(user=request.user).order_by('-orderDate')[:3]
 
     return render(request,'accounts/my_account.html',context={"orders": orders})
 def logout_user(request):

@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {%  block content %}
-<p>Page des concerts</p>
-{% for concert in concerts %}
-<div class="card" style="width: 18rem;">
-  <img src="{{ concert.image }}" class="card-img-top">
+<h3>Page des concerts</h3>
+<div class="row">
+    {% for concert in concerts %}
+  <div class="col-sm-6">
+<div class="card">
+  <img src="{{ concert.image.url }}" class="card-img-top">
   <div class="card-body">
     <h5 class="card-title">{{ concert.artist.name }} - {{concert.tour.name }}</h5>
     <p class="card-text"> Concert à {{ concert.place }} le {{concert.date }} <br>
@@ -11,8 +13,10 @@
         {{emplacement.name}},
         {% endfor %}
     </p>
-    <a href="#" class="btn btn-primary">Ca m'intéresse</a>
+    <a href="{% url 'event_detail' concert.slug %}" class="btn btn-primary">Ca m'intéresse</a>
   </div>
 </div>
-{% endfor %}
+</div>
+    {% endfor %}
+</div>
 {% endblock %}
