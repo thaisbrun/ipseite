@@ -1,32 +1,11 @@
 {% extends 'base.html' %}
 
 {%  block content %}
-<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="./media/carousel1.png" class="d-block w-100">
-    </div>
-    <div class="carousel-item">
-      <img src="./media/carousel2.png" class="d-block w-100">
-    </div>
-    <div class="carousel-item">
-      <img src="./media/carousel3.jpg" class="d-block w-100">
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-    <div class="container">
-      <br>
-      <h3><i>Bientôt complet</i></h3>
-      <br>
-  <div class="row align-items-start">
+    <img src="./media/indexImg.jpg" class="img-fluid" style="position: absolute;left:0; right:0; width: 100%;">
+<div class="container">
+    <div class="row text-center" style="margin-top: 400px;">
+    <h3><i>Bientôt complet</i></h3></div>
+  <div class="row align-items-start" style="margin-top:40px;">
       {% for concert in concerts %}
       {% if concert.nbTickets < 10 %}
       <div class="card" style="width: 20rem; margin:10px; border-color: cornflowerblue;">
@@ -54,7 +33,6 @@
       {% endif %}
       {% endfor %}
   </div>
-        <br>
         <div class="text-center">
       <h3>Les concerts</h3>
         </div>
@@ -87,5 +65,5 @@
       {% endfor %}
                   </div>
 <br>
-    </div>
+</div>
 {% endblock %}

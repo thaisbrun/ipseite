@@ -26,7 +26,7 @@ def event_detail(request, slug):
             return render(request, 'home/detail.html', context={"evenement": concert, "emplacements": emplacements})
     for festival in festivals:
         if event.id == festival.id:
-            return render(request, 'home/detail.html', context={"evenement": festival, "emplacements": emplacements})
+            return render(request, 'home/detail.html', context={"evenement": festival})
 
 
 
