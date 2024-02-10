@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model, login, logout, authenticate
+from django.contrib import messages
 
 from accounts.models import Shopper
 from ipseite.models import Order
@@ -29,6 +30,8 @@ def login_user(request):
         if user:
             login(request,user)
             return redirect('index')
+        else:
+            messages.warning(request, "Aucun compte n'est associé à ce pseudo et ce mot de passe. Veuillez réessayer.")
     return render(request, 'accounts/login.html')
 
 def my_account(request):

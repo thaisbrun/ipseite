@@ -33,6 +33,7 @@
       {% endif %}
       {% endfor %}
   </div>
+    <br>
         <div class="text-center">
       <h3>Les concerts</h3>
         </div>
@@ -47,7 +48,10 @@
   </div>
       </div>
       {% endfor %}
-      </div><br>
+      </div>
+    <a href="{% url 'concerts' %}"><i>Voir plus de concerts </i></a>
+    <br>
+    <br>
         <div class="text-center">
       <h3>Les festivals</h3></div>
                   <div class="row align-items-start">
@@ -63,7 +67,9 @@
   </div>
 </div>
       {% endfor %}
+                              <a href="{% url 'festivals' %}"><i>Voir plus de festivals </i></a>
                   </div>
+
 <br>
 </div>
 {% endblock %}

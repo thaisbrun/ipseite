@@ -5,6 +5,12 @@
     <div class="row">
         <br>
         <br>
+        {% if messages %}
+    {% for message in messages %}
+    <div class="card text-bg-danger mb-3">{{ message }}</div>
+    {% endfor %}
+{% endif %}
+        <br>
 <div class="card text-center">
     <h5 class="card-header">Connexion</h5>
   <div class="card-body">

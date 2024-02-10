@@ -21,9 +21,10 @@ def event_detail(request, slug):
     emplacements = Emplacement.objects.all()
     festivals = Festival.objects.all()
     concerts = Concert.objects.all()
+    ticketLowerPrice = Ticket.objects.all().filter(event=event).order_by('price').first()
     for concert in concerts:
         if event.id == concert.id:
-            return render(request, 'home/detail.html', context={"evenement": concert, "emplacements": emplacements})
+            return render(request, 'home/detail.html', context={"evenement": concert, "emplacements": emplacements, "ticketLowerPrice": ticketLowerPrice})
     for festival in festivals:
         if event.id == festival.id:
             return render(request, 'home/detail.html', context={"evenement": festival})
