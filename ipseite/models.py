@@ -90,6 +90,7 @@ class Order(models.Model):
     ordered = models.BooleanField(default=False)
     orderDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE)
     event = models.ForeignKey(Evenement, on_delete=models.CASCADE)
 

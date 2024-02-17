@@ -1,4 +1,4 @@
-
+import debug_toolbar.urls
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
@@ -20,6 +20,5 @@ urlpatterns = [
                   path('event/<str:slug>', event_detail, name="event_detail"),
                   path('cart/', cart, name="cart"),
                   path('cart/delete', delete_cart, name="delete_cart"),
-                  path('evenement/<str:slug>/add-to-cart/', add_to_cart, name="add-to-cart"),
-
+                  path('__debug__/', include(debug_toolbar.urls)),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

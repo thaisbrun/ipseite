@@ -31,16 +31,20 @@ def event_detail(request, slug):
             return render(request, 'home/detail.html', context={"evenement": festival})
 
 
+def add_to_cart(request):
 
-def add_to_cart(request, slug):
-    """ Récupération de l'utilisateur """
+    if request.method == "POST":
+        """ Récupération de l'utilisateur """
     user = request.user
     """ Récupération de l'evenement """
-    event = get_object_or_404(Evenement, slug=slug)
+    event_id = request.POST.get('evenement')
+    emplacement_id = request.POST.get('emplacement')
+    event = get_object_or_404(Evenement, id=event_id)
+    emplacement = get_object_or_404(Emplacement, id=emplacement_id)
+    ticket = Ticket.objects.all().filter(emplacement=emplacement).first()
     """Récupération ou création du panier """
     cart, _ = Cart.objects.get_or_create(user=user)
-    order, created = Order.objects.get_or_create(user=user, ordered=False, event=event)
-
+    order, created = Order.objects.get_or_create(user=user, ordered=False, event=event, ticket=ticket)
     if created:
         cart.orders.add(order)
         cart.save()
@@ -48,7 +52,7 @@ def add_to_cart(request, slug):
         order.quantity += 1
         order.save()
 
-    return redirect(reverse("event_detail", kwargs={"slug":slug}))
+    return redirect('index')
 def ml(request):
     return render(request, 'home/mentionslegales.html')
 

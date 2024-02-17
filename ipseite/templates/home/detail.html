@@ -11,6 +11,9 @@ list des emplacements dispo, prix -->
     </div>
     <div class="col-8">
         <br>
+        <form action="/add_to_cart/" method="POST" >
+            {% csrf_token %}
+            <input name="evenement" value="{{ evenement.id }}">
     <h2><b>{{evenement.artist.name }}</b></h2>
         <h2><b>{% for artist in evenement.artists.all %}
       {{ artist.name }} -
@@ -18,17 +21,17 @@ list des emplacements dispo, prix -->
         <h2><i>Le {{evenement.date }} {{ evenement.startDate }} à {{ evenement.place }} </i></h2>
         <p>{{ evenement.description }}</p>
         {% if emplacements.count != null %}
-        <select class="form-select" style="width: 200px;">
+        <select name="emplacement" class="form-select" style="width: 200px;">
           {% for emplacement in emplacements %}
               <option value="{{emplacement.id}}">{{ emplacement.name }}</option>
           {% endfor %}
         </select>
         {% endif %}
         <b> A partir de {{ticketLowerPrice.price }} euros </b>
-        <!-- Quand je sélectionne un emplacement : le prix du ticket correspondant à cet evenement et cet emplacement se met en ligne -->
         <br>
         <br>
-        <a href="{% url 'add-to-cart' evenement.slug %}" class="btn btn-outline-primary">Ajouter au panier</a>
+            <button type="submit" class="btn btn-outline-primary">Ajouter au panier</button>
+        </form>
 
     </div>
   </div>
