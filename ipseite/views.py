@@ -12,6 +12,7 @@ def index(request):
     evenements = Evenement.objects.all().order_by('createDate')
     concerts = Concert.objects.all().order_by('date')
     festivals = Festival.objects.all().order_by('startDate')
+
     return render(request, 'home/index.html',
                   context={"artists": artists, "concerts": concerts, "festivals": festivals, "evenements": evenements})
 

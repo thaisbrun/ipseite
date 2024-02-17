@@ -105,12 +105,11 @@ class Cart(models.Model):
 
     def __str__(self):
         return self.user.username
-
+#         order.ordered = True
+       #     order.ordered_date = timezone.now()
+           # order.save()
     def delete(self, *args, **kwargs):
         for order in self.orders.all():
-            order.ordered = True
-            order.ordered_date = timezone.now()
-            order.save()
-
+            order.delete()
         self.orders.clear()
         super().delete(*args, **kwargs)
