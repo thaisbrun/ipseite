@@ -65,6 +65,7 @@ class Ticket(models.Model):
     createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
     event = models.ForeignKey(Evenement, on_delete=models.CASCADE)
+    user = models.ForeignKey(AUTH_USER_MODEL, null=True, on_delete=models.CASCADE)
 
 """ Festival """
 class Festival(Evenement):

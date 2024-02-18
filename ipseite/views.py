@@ -41,7 +41,7 @@ def add_to_cart(request):
     emplacement_id = request.POST.get('emplacement')
     event = get_object_or_404(Evenement, id=event_id)
     emplacement = get_object_or_404(Emplacement, id=emplacement_id)
-    ticket = Ticket.objects.all().filter(emplacement=emplacement).first()
+    ticket = Ticket.objects.all().filter(event=event, emplacement=emplacement, user__isnull=True).first()
     """Récupération ou création du panier """
     cart, _ = Cart.objects.get_or_create(user=user)
     order, created = Order.objects.get_or_create(user=user, ordered=False, event=event, ticket=ticket)
@@ -53,6 +53,10 @@ def add_to_cart(request):
         order.save()
 
     return redirect('index')
+
+#A mettre dans création fonction pour paiement validé :
+    #ticket.user = user
+   # ticket.save()
 def ml(request):
     return render(request, 'home/mentionslegales.html')
 
