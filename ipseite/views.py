@@ -80,15 +80,14 @@ def cart(request):
         return render(request, 'accounts/login.html')
 
 def delete_orderFromCart(request, id):
-    order = Order.objects.get(id=id)
-    user = request.user
-    ticket = Ticket.objects.all().filter(user=user, event=order.event, emplacement=order.ticket.emplacement).first()
+    order = Order.objects.get(id=id, user=request.user)
     if order is not None:
-        if order.quantity > 1:
-            order.quantity -= 1
-          #  ticket.delete()
-        if order.quantity == 1:
+        if order.quantity == 1 and order.quantity != 0:
             order.delete()
+        else:
+            order.quantity -= 1
+            order.save()
+
     return redirect('cart')
 
 def delete_cart(request):
