@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from djangoProject import settings
-from ipseite.views import add_to_cart, event_detail, concerts, festivals, cart, delete_cart
+from ipseite.views import add_to_cart, event_detail, concerts, festivals, cart, delete_cart, delete_orderFromCart
 from accounts.views import signup, logout_user, login_user, my_account, delete_user
 
 urlpatterns = [
@@ -20,5 +20,6 @@ urlpatterns = [
                   path('event/<str:slug>', event_detail, name="event_detail"),
                   path('cart/', cart, name="cart"),
                   path('cart/delete', delete_cart, name="delete_cart"),
+                  path('cart/delete_orderFromCart/<str:id>', delete_orderFromCart, name="delete_orderFromCart"),
                   path('__debug__/', include(debug_toolbar.urls)),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

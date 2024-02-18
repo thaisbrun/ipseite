@@ -5,6 +5,8 @@
 <p>{{ order.event.place }} {{order.quantity }}
     {{order.totalPrice }}</p>
 {{ order.ticket.id }}
+<a href="{% url 'delete_orderFromCart' order.id %}"> Retirer de mon panier </a>
+<br>
 {% endfor %}
 <a href="{% url 'delete_cart' %}"> Supprimer mon panier </a>
 {% endblock %}
