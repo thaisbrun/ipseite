@@ -89,7 +89,6 @@ def delete_orderFromCart(request, id):
             order.save()
 
     return redirect('cart')
-
 def delete_cart(request):
     if cart := request.user.cart:
         cart.delete()

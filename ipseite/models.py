@@ -87,7 +87,6 @@ class Concert(Evenement):
 
 class Order(models.Model):
     quantity = models.IntegerField(default=1)
-    totalPrice = models.FloatField(default=0.0)
     ordered = models.BooleanField(default=False)
     orderDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
@@ -98,15 +97,23 @@ class Order(models.Model):
     def __str__(self):
         return f"{self.event.place} ({self.quantity})"
 
+    def line_total(self):
+        return self.quantity * self.ticket.price
+
 
 """ Panier """
 
 class Cart(models.Model):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE)
     orders = models.ManyToManyField(Order)
-
     def __str__(self):
         return self.user.username
+
+    def total_price(self):
+        for order in self.orders.all():
+            total = order.ticket.price * order.quantity
+            return total
+
 #         order.ordered = True
        #     order.ordered_date = timezone.now()
            # order.save()

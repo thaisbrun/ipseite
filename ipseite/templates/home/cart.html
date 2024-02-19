@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
-
 {% block content %}
 {% for order in orders %}
-<p>{{ order.event.place }} Quantité: {{order.quantity }}
-    {{order.totalPrice }}</p>
+<p>{{ order.event.place }}
+    Quantité: {{order.quantity }}
+    Prix total : {{ order.line_total }}
+</p>
 <a href="{% url 'delete_orderFromCart' order.id %}"> Retirer de mon panier </a>
 <br>
 {% endfor %}
+<p> Prix total du panier : </p>
 <a href="{% url 'delete_cart' %}"> Supprimer mon panier </a>
 {% endblock %}
