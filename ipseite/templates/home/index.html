@@ -4,14 +4,14 @@
     <img src="./media/indexImg.jpg" class="img-fluid" style="position: absolute;left:0; right:0; width: 100%;">
 <div class="container">
     <div class="row text-center" style="margin-top: 400px;background: #ab8ec2;">
-    <h3><i>Bientôt complet</i></h3></div>
+    <h3>Bientôt complet</h3></div>
   <div class="row align-items-start" style="margin-top:40px;">
       {% for concert in concerts %}
       {% if concert.nbTickets < 10 %}
-      <div class="card" style="width: 20rem; margin:10px; border-color: #ab8ec2; border-width: medium;">
+      <div class="card" style="background-color: #f0e3fa; width: 20rem; margin:10px; border-color: #ab8ec2; border-width: medium;">
           <img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" style="margin-top: 10px">
   <div class="card-body">
-      <a href="{% url 'event_detail' concert.slug %}"><h5 class="card-title">{{ concert.artist.name }} à {{concert.place }} </h5></a>
+      <a href="{% url 'event_detail' concert.slug %}" style="color:#ab8ec2"><h5 class="card-title">{{ concert.artist.name }} à {{concert.place }} </h5></a>
       <p class="card-text"><i>Le {{concert.date }}</i></p>
       <p class="card-text">{{concert.description}}</p>
   </div>
@@ -20,10 +20,10 @@
       {% endfor %}
            {% for festival in festivals %}
       {% if festival.nbTickets < 10 %}
-      <div class="card" style="width: 20rem; margin:10px;  border-color: #ab8ec2; border-width: medium;">
+      <div class="card" style="background-color: #f0e3fa; width: 20rem; margin:10px;  border-color: #ab8ec2; border-width: medium;">
 <img src="{{ festival.image.url }}" alt="{{ festival.place }}" style="margin-top: 10px" >
   <div class="card-body">
-    <a href="{% url 'event_detail' festival.slug %}">  <h5 class="card-title">
+    <a href="{% url 'event_detail' festival.slug %}" style="color:#ab8ec2;">  <h5 class="card-title">
                     {%for artist in festival.artists.all %}
         {{ artist.name }}, {%endfor%} à {{festival.place }} </h5></a>
             <p class="card-text"><i>Du {{festival.startDate }} au {{ festival.finishDate }}</i></p>
@@ -39,27 +39,27 @@
         </div>
           <div class="row align-items-start">
     {% for concert in concerts %}
-      <div class="card" style="width: 20rem; margin:10px; border-color: #ab8ec2; border-width: medium">
+      <div class="card" style="background-color: #f0e3fa; width: 20rem; margin:10px; border-color: #ab8ec2; border-width: medium">
 <img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" style="margin-top: 10px">
   <div class="card-body">
-      <a href="{% url 'event_detail' concert.slug %}"><h5 class="card-title">{{ concert.artist.name }} à {{concert.place }} </h5></a>
+      <a href="{% url 'event_detail' concert.slug %}" style="color:#ab8ec2; "><h5 class="card-title">{{ concert.artist.name }} à {{concert.place }} </h5></a>
       <p class="card-text"><i>Le {{concert.date }}</i></p>
       <p class="card-text">{{concert.description}}</p>
   </div>
       </div>
       {% endfor %}
       </div>
-    <a href="{% url 'concerts' %}"><i>Voir plus de concerts </i></a>
+    <a href="{% url 'concerts' %}" style="color:#ab8ec2;"><i>Voir plus de concerts </i></a>
     <br>
     <br>
         <div class="text-center" style="background: #ab8ec2; border-width: medium">
       <h3 style="color:whitesmoke">Les festivals</h3></div>
                   <div class="row align-items-start">
     {% for festival in festivals %}
-      <div class="card" style="width: 20rem; margin:10px;border-color: #ab8ec2; border-width: medium">
+      <div class="card" style="background-color: #f0e3fa; width: 20rem; margin:10px;border-color: #ab8ec2; border-width: medium">
 <img src="{{ festival.image.url }}" alt="{{ festival.place }}" style="margin-top: 10px " >
   <div class="card-body">
-    <a href="{% url 'event_detail' festival.slug %}">  <h5 class="card-title">
+    <a href="{% url 'event_detail' festival.slug %}" style="color:#ab8ec2;">  <h5 class="card-title">
                     {%for artist in festival.artists.all %}
         {{ artist.name }}, {%endfor%} à {{festival.place }} </h5></a>
             <p class="card-text"><i>Du {{festival.startDate }} au {{ festival.finishDate }}</i></p>
@@ -67,7 +67,7 @@
   </div>
 </div>
       {% endfor %}
-                              <a href="{% url 'festivals' %}"><i>Voir plus de festivals </i></a>
+                              <a href="{% url 'festivals' %}" style="color:#ab8ec2;"><i>Voir plus de festivals </i></a>
                   </div>
 
 <br>
