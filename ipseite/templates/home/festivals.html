@@ -1,7 +1,33 @@
 {% extends 'base.html' %}
 {%  block content %}
-<p>Page des festivals</p>
-{% for festival in festivals %}
-<h1> {{ festival.place }} </h1>
-{% endfor %}
+<div class="container">
+    <br>
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}" style="color:#ab8ec2">Home</a></li>
+    <li class="breadcrumb-item active" style="font-family: Questrial,serif">Festivals</li>
+  </ol>
+</nav>
+<h3>Les festivals à venir </h3>
+<div class="row">
+    {% for festival in festivals %}
+  <div class="col-sm-6">
+<div class="card" style="background-color: #f0e3fa; margin:10px; border-color: #ab8ec2; border-width: medium;">
+  <img src="{{ festival.image.url }}" class="card-img-top" style="padding: 10px">
+  <div class="card-body">
+    <h4 class="card-title">{{ festival.name }} - <b>{% for artist in festival.artists.all %}
+      {{ artist.name }} -
+        {%endfor%}</b></h4>
+    <p class="card-text"> Concert à {{ festival.place }} du {{festival.startDate }} au {{ festival.finishDate }} <br>
+       A partir de : {{ ticketLowerPrice.price }} euros
+        <br>
+    </p>
+    <a href="{% url 'event_detail' festival.slug %}" class="btn" style="background-color:#ab8ec2; color:whitesmoke">Ca m'intéresse</a>
+  </div>
+</div>
+      <br>
+</div>
+    {% endfor %}
+</div>
+</div>
 {% endblock %}

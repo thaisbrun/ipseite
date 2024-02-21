@@ -19,7 +19,7 @@ def index(request):
 
 def event_detail(request, slug):
     event = get_object_or_404(Evenement, slug=slug)
-    emplacements = Emplacement.objects.select_related('event', 'ticket')
+    emplacements = Emplacement.objects.all()
     festivals = Festival.objects.all()
     concerts = Concert.objects.all()
     ticketLowerPrice = Ticket.objects.all().filter(event=event).order_by('price').first()
@@ -71,7 +71,10 @@ def concerts(request):
 
 def festivals(request):
     festivals = Festival.objects.all().order_by('startDate')
-    return render(request, 'home/festivals.html', context={"festivals": festivals})
+    for festival in festivals:
+        ticketLowerPrice = Ticket.objects.filter(event_id=festival.id).order_by('price').first()
+    return render(request, 'home/festivals.html', context={"festivals": festivals,
+                                                           "ticketLowerPrice": ticketLowerPrice })
 
 def cart(request):
     try:

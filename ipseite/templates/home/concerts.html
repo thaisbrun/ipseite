@@ -4,7 +4,7 @@
     <br>
     <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'index' %}">Home</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'index' %}" style="color:#ab8ec2">Home</a></li>
     <li class="breadcrumb-item active" style="font-family: Questrial,serif">Concerts</li>
   </ol>
 </nav>
@@ -20,7 +20,7 @@
        A partir de : {{ ticketLowerPrice.price }} euros
         <br>
     Emplacements dispos : {%for emplacement in emplacements %}
-        {{ emplacement.name }},
+        {{ emplacement.id }},
         {% endfor %}
     </p>
     <a href="{% url 'event_detail' concert.slug %}" class="btn" style="background-color:#ab8ec2; color:whitesmoke">Ca m'intéresse</a>
