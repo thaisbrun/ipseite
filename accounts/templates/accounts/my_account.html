@@ -5,24 +5,24 @@
 {% if user.is_authenticated %}
     <form method="POST" action="">
             {% csrf_token %}
-        <h1 class="text-center"> Mes informations de profil </h1>
+        <h2> Mes informations de profil </h2>
         <br>
           <div class="row">
     <div class="col">
-        <label for="first_name">Prénom</label>
-    <input type="text" class="form-control" name="first_name" id="first_name" value="{{ user.first_name }}">
+        <label for="first_name" style="font-weight: bold; color: #ab8ec2;">Prénom</label>
+    <input type="text" class="form-control" name="first_name" id="first_name" value="{{ user.first_name }}" style="border-color: #ab8ec2;">
     </div>
        <div class="col">
-    <label for="last_name">Nom</label>
-    <input type="text" class="form-control" name="last_name" id="last_name" value="{{ user.last_name }}">
+    <label for="last_name" style="font-weight: bold; color: #ab8ec2;">Nom</label>
+    <input type="text" class="form-control" name="last_name" id="last_name" value="{{ user.last_name }}" style="border-color: #ab8ec2;">
   </div>
           <div class="col">
-    <label for="last_name">Mail</label>
-    <input type="email" class="form-control" name="email" id="email" value="{{ user.email }}">
+    <label for="last_name" style="font-weight: bold; color: #ab8ec2;">Mail</label>
+    <input type="email" class="form-control" name="email" id="email" value="{{ user.email }}" style="border-color: #ab8ec2;">
   </div>
         <div class="col">
-        <label for="username" class="form-label">Pseudo : </label>
-        <input id="username" name="username" type="text" class="form-control" value="{{ user.username }}">
+        <label for="username" style="font-weight: bold; color: #ab8ec2;" class="form-label">Pseudo</label>
+        <input id="username" name="username" type="text" class="form-control" value="{{ user.username }}" style="border-color: #ab8ec2;">
         </div>
           </div>
 <br>
