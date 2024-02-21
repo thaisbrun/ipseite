@@ -13,12 +13,11 @@ list des emplacements dispo, prix -->
         <br>
         <form action="/add_to_cart/" method="POST" >
             {% csrf_token %}
-            <input name="evenement" value="{{ evenement.id }}">
-    <h2><b>{{evenement.artist.name }}</b></h2>
-        <h2><b>{% for artist in evenement.artists.all %}
+    <h2>{{evenement.artist.name }}</h2>
+        <h2>{% for artist in evenement.artists.all %}
       {{ artist.name }} -
-        {%endfor%}</b></h2>
-        <h2><i>Le {{evenement.date }} {{ evenement.startDate }} à {{ evenement.place }} </i></h2>
+        {%endfor%}</h2>
+        <h2>Le {{evenement.date }} {{ evenement.startDate }} à {{ evenement.place }}</h2>
         <p>{{ evenement.description }}</p>
         {% if emplacements.count != null %}
         <select name="emplacement" class="form-select" style="width: 200px;">
@@ -30,7 +29,7 @@ list des emplacements dispo, prix -->
         <b> A partir de {{ticketLowerPrice.price }} euros </b>
         <br>
         <br>
-            <button type="submit" class="btn btn-outline-primary">Ajouter au panier</button>
+            <button type="submit" class="btn">Ajouter au panier</button>
         </form>
 
     </div>
