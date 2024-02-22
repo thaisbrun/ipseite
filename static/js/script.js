@@ -22,27 +22,24 @@ function validateUserForm() {
     return false;
   }
   if(password == ""){
-    alert("Veuillez saisir un mot de passe")
-    if(password.length < 12) {
-      alert("Le mot de passe doit au moins contenir 12 caractères")
-    }else if(password.search(/[a-z]/) < 0) {
-
-console.log(“Error: Password must contain at least one lowercase letter”);
-
-} else if(password.search(/[A-Z]/) < 0) {
-
-console.log(“Error: Password must contain at least one uppercase letter”);
-
-} else if(password.search(/[0-9]/) < 0) {
-
-console.log(“Error: Password must contain at least one number”);
-
-} else {
-
-console.log(“Success!”);
-
-}  ”’
     alert("Veuillez saisir un mot de passe fort contenant 1 chiffre, 1 majuscule, 1 minuscule et un caractère spécial");
-    return false;
+        return false;
+    }
+  else if(password.length < 12) {
+      alert("Le mot de passe doit au moins contenir 12 caractères")
+        return false;
+    }
+  else if(password.search(/[a-z]/) < 0) {
+      alert("Le mot de passe doit contenir au moins une minuscule");
+          return false;
+    }
+  else if(password.search(/[A-Z]/) < 0) {
+      alert("Le mot de passe doit contenir au moins une majuscule");
+          return false;
+
+    }
+  else if(password.search(/[0-9]/) < 0) {
+      alert("Le mot de passe doit contenir au moins un chiffre");
+          return false;
   }
 }
