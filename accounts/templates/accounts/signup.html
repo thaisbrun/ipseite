@@ -10,11 +10,11 @@
     <h5 class="card-header">Inscription</h5>
   <div class="card-body">
     <p class="card-text">
-<form method="POST" action="">
+<form method="POST" action="" name="account_modification" onsubmit="return validateUserForm()">
     {% csrf_token %}
       <div class="row">
             <div class="col-3">
-        <label for="first_name" class="form-label">Prénom : </label>
+        <label for="first_name" class="form-label" style="color: #ab8ec2;">Prénom : </label>
   </div>
       <div class="col-9">
         <input id="first_name" name="first_name" type="text" class="form-control">
@@ -23,7 +23,7 @@
             <br>
       <div class="row">
             <div class="col-3">
-        <label for="last_name" class="form-label">Nom : </label>
+        <label for="last_name" style="color: #ab8ec2;" class="form-label">Nom : </label>
   </div>
       <div class="col-9">
         <input id="last_name" name="last_name" type="text" class="form-control">
@@ -32,7 +32,7 @@
             <br>
             <div class="row">
             <div class="col-3">
-        <label for="email" class="form-label">Mail : </label>
+        <label for="email" class="form-label" style="color: #ab8ec2;">Mail : </label>
   </div>
       <div class="col-9">
         <input id="email" name="email" type="text" class="form-control">
@@ -41,7 +41,7 @@
             <br>
             <div class="row">
   <div class="col-3">
-        <label for="username" class="form-label">Pseudo : </label>
+        <label for="username" class="form-label" style="color: #ab8ec2;">Pseudo : </label>
   </div>
       <div class="col-9">
         <input id="username" name="username" type="text" class="form-control">
@@ -50,7 +50,7 @@
       <br>
             <div class="row">
       <div class="col-3">
-        <label for="password" class="form-label">Mot de passe : </label>
+        <label for="password" class="form-label" style="color: #ab8ec2;">Mot de passe : </label>
       </div>
       <div class="col-9">
         <input id="password" name="password" type="password" class="form-control">

@@ -2,10 +2,17 @@
 
 {% block content %}
 <div class="container">
+    <br>
 {% if user.is_authenticated %}
-    <form method="POST" action="">
+        <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}" style="color:#ab8ec2">Home</a></li>
+    <li class="breadcrumb-item active" style="font-family: Questrial,serif">Mon profil</li>
+  </ol>
+</nav>
+    <form method="POST" name="account_modification" onsubmit="return validateUserForm()" action="">
             {% csrf_token %}
-        <h2> Mes informations de profil </h2>
+        <h3> Mes informations de profil </h3>
         <br>
           <div class="row">
     <div class="col">
@@ -32,14 +39,15 @@
     <div class="col-9">
     </div>
     <div class="col-3">
-      <a href="{% url 'delete_user' %}"class="link-opacity-50">Supprimer mon profil </a>
+      <a href="{% url 'delete_user' %}"class="link-opacity-50" style="color:#ab8ec2">Supprimer mon profil </a>
     </div>
   </div>
         <div class="row">
-      <h3> Mes dernières commandes : </h3>
+      <h3 style="color:#ab8ec2">Mes dernières commandes : </h3>
               <br>
+            <br>
         {% for order in orders %}
-    <div class="col">
+    <div class="col-3">
         <p> <b>Commande n°{{order.id}}</b>
             <br>
             Passée le : {{ order.orderDate }}
@@ -48,21 +56,18 @@
             <br>
         Quantité : {{ order.quantity }}
             <br>
-            Total : {{ order.price }}
+            Total : A coder
             <br>
             Lieu : {{order.event.place}}
             <br>
         </p>
     </div>
-    <div class="col">
-            <br>
+    <div class="col-4">
             <img src="{{ order.event.image.url }}" width="150" height="160">
-            <br>
     </div>
         {% endfor %}
           </div>
         <br>
-
 <br>
     </form>
 </div>

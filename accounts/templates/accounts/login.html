@@ -7,20 +7,24 @@
         <br>
         {% if messages %}
     {% for message in messages %}
-    <div class="card text-bg-danger mb-3">{{ message }}</div>
+        <div>
+            <p>
+                {{ message }}
+            </p>
+        </div>
     {% endfor %}
 {% endif %}
         <br>
 <div class="card text-center">
     <h5 class="card-header">Connexion</h5>
   <div class="card-body">
-    <a class="card-subtitle sm text-body-secondary" style="color:black;" href="{% url 'signup' %}">Pas de compte ? Créez le ici</a>
+    <a class="card-subtitle sm text-body-secondary" style="color:#ab8ec2;" href="{% url 'signup' %}">Pas de compte ? Créez le ici</a>
     <p class="card-text">
 <form method="POST" action="">
     {% csrf_token %}
       <div class="row">
   <div class="col-3">
-        <label for="username" class="form-label">Pseudo : </label>
+        <label for="username" class="form-label" style="color: #ab8ec2;">Pseudo : </label>
   </div>
       <div class="col-9">
         <input id="username" name="username" type="text" class="form-control">
@@ -29,7 +33,7 @@
       <br>
             <div class="row">
       <div class="col-3">
-        <label for="password" class="form-label">Mot de passe : </label>
+        <label for="password" class="form-label" style="color: #ab8ec2;">Mot de passe : </label>
       </div>
       <div class="col-9">
         <input id="password" name="password" type="password" class="form-control">
