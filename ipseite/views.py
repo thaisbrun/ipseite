@@ -21,8 +21,8 @@ def event_detail(request, slug):
     event = get_object_or_404(Evenement, slug=slug)
     festivals = Festival.objects.all()
     concerts = Concert.objects.all()
-    emplacements = Ticket.objects.filter(event=event).values('emplacement__name').distinct()
-    ticketLowerPrice = Ticket.objects.all().filter(event=event).order_by('price').first()
+    emplacements = Ticket.objects.filter(event=event, user__isnull=True).values('emplacement__name', 'emplacement_id').distinct()
+    ticketLowerPrice = Ticket.objects.all().filter(event=event, user__isnull=True).order_by('price').first()
     for concert in concerts:
         if event.id == concert.id:
             return render(request, 'home/detail.html', context={"evenement": concert, "emplacements": emplacements,

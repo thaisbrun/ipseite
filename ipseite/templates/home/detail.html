@@ -19,14 +19,12 @@ list des emplacements dispo, prix -->
         {%endfor%}</h2>
         <h2>Le {{evenement.date }} {{ evenement.startDate }} à {{ evenement.place }}</h2>
         <p>{{ evenement.description }}</p>
-        {% if emplacements is None %}
+        {% if emplacements is not None %}
         <select name="emplacement" class="form-select" style="width: 200px;">
           {% for emplacement in emplacements %}
-              <option value="{{emplacement.id}}">{{ emplacement.name }}</option>
+              <option value="{{ emplacement.emplacement_id }}">{{ emplacement.emplacement__name }}</option>
           {% endfor %}
         </select>
-            {% else %}
-            <h2> Plus de places disponibles </h2>
             {% endif %}
         <b> A partir de {{ticketLowerPrice.price }} euros </b>
         <br>
