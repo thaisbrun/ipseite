@@ -19,9 +19,9 @@ def index(request):
 
 def event_detail(request, slug):
     event = get_object_or_404(Evenement, slug=slug)
-    emplacements = Emplacement.objects.all()
     festivals = Festival.objects.all()
     concerts = Concert.objects.all()
+    emplacements = Ticket.objects.filter(event=event).values('emplacement__name').distinct()
     ticketLowerPrice = Ticket.objects.all().filter(event=event).order_by('price').first()
     for concert in concerts:
         if event.id == concert.id:
@@ -65,14 +65,14 @@ def concerts(request):
     concerts = Concert.objects.all().order_by('date')
     tickets = Ticket.objects.all().order_by('createDate')
     for concert in concerts:
-            ticketLowerPrice = Ticket.objects.filter(event_id=concert.id).order_by('price').first()
-            emplacements = Ticket.objects.filter(event_id=concert.id).order_by('emplacement__name')
+            ticketLowerPrice = Ticket.objects.filter(event=concert).order_by('price').first()
+            emplacements = Ticket.objects.filter(event=concert).values('emplacement__name').distinct()
             return render(request, 'home/concerts.html', context={"concerts": concerts, "emplacements": emplacements, "ticketLowerPrice": ticketLowerPrice})
 
 def festivals(request):
     festivals = Festival.objects.all().order_by('startDate')
     for festival in festivals:
-        ticketLowerPrice = Ticket.objects.filter(event_id=festival.id).order_by('price').first()
+        ticketLowerPrice = Ticket.objects.filter(event=festival).order_by('price').first()
     return render(request, 'home/festivals.html', context={"festivals": festivals,
                                                            "ticketLowerPrice": ticketLowerPrice })
 

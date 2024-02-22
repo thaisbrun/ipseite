@@ -1,4 +1,4 @@
-h1, h2, h3, p, h4, h5, a, li, i, footer {
+h1, h2, h3, p, h4, h5, a, li, i, footer, form, button, option, select {
     font-family: "Questrial", serif;
 }
 .input{
