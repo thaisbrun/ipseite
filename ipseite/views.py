@@ -79,6 +79,8 @@ def festivals(request):
 def cart(request):
     try:
         cart = Cart.objects.get(id=request.user.cart.id)
+        #for order in cart.orders.all():
+            #totalPrice = sum(int(order.ticket.price))
     except Cart.DoesNotExist:
         return render(request,'home/cart.html')
     if request.user is not None:
