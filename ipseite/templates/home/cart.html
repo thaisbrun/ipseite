@@ -38,8 +38,13 @@
   </tbody>
 </table>
 <br>
-
-<p> Prix total du panier : {{total}}</p>
+    <div class="text-center">
+     <p>Prix total du panier : {{total}} &emsp;&emsp;
+         <a class="btn" style="background-color:#ab8ec2; color:whitesmoke"> Passer au paiement </a></p>
+    <br>
+    </div>
 <a href="{% url 'delete_cart' %}"> Supprimer mon panier </a>
+
 </div>
+<br>
 {% endblock %}
