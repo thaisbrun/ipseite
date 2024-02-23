@@ -48,7 +48,6 @@ class Evenement(models.Model):
     createDate = models.DateField(default=timezone.now)
     activation = models.BinaryField()
     image = models.ImageField(upload_to="imagesEv", blank=True, null=True)
-    nbTickets = models.IntegerField(default=1)
 
 """ Emplacement """
 class Emplacement(models.Model):
