@@ -5,6 +5,7 @@
 list des emplacements dispo, prix -->
 <div class="container">
   <div class="row">
+
     <div class="col-4">
         <br>
 <img src="{{ evenement.image.url }}" width="250" height="260">
@@ -13,6 +14,7 @@ list des emplacements dispo, prix -->
         <br>
         <form action="/add_to_cart/" method="POST" >
             {% csrf_token %}
+            <input name="slug" value="{{ evenement.slug }}" hidden>
     <h2>{{evenement.artist.name }}</h2>
         <h2>{% for artist in evenement.artists.all %}
       {{ artist.name }} -

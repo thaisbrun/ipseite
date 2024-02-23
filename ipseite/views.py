@@ -12,7 +12,6 @@ def index(request):
     evenements = Evenement.objects.all().order_by('createDate')
     concerts = Concert.objects.all().order_by('date')
     festivals = Festival.objects.all().order_by('startDate')
-
     return render(request, 'home/index.html',
                   context={"artists": artists, "concerts": concerts, "festivals": festivals, "evenements": evenements})
 
@@ -38,14 +37,15 @@ def add_to_cart(request):
         """ Récupération de l'utilisateur """
     user = request.user
     """ Récupération de l'evenement """
-    event_id = request.POST.get('evenement')
+    slug = request.POST.get('slug')
     emplacement_id = request.POST.get('emplacement')
-    event = get_object_or_404(Evenement, id=event_id)
+    event = get_object_or_404(Evenement, slug=slug)
     emplacement = get_object_or_404(Emplacement, id=emplacement_id)
     ticket = Ticket.objects.all().filter(event=event, emplacement=emplacement, user__isnull=True).first()
     """Récupération ou création du panier """
     cart, _ = Cart.objects.get_or_create(user=user)
     order, created = Order.objects.get_or_create(user=user, ordered=False, event=event, ticket=ticket)
+    order.user = user
     if created:
         cart.orders.add(order)
         cart.save()
@@ -54,10 +54,6 @@ def add_to_cart(request):
         order.save()
 
     return redirect('index')
-
-#A mettre dans création fonction pour paiement validé :
-    #ticket.user = user
-   # ticket.save()
 def ml(request):
     return render(request, 'home/mentionslegales.html')
 
@@ -65,9 +61,9 @@ def concerts(request):
     concerts = Concert.objects.all().order_by('date')
     tickets = Ticket.objects.all().order_by('createDate')
     for concert in concerts:
-            ticketLowerPrice = Ticket.objects.filter(event=concert).order_by('price').first()
-            emplacements = Ticket.objects.filter(event=concert).values('emplacement__name').distinct()
-            return render(request, 'home/concerts.html', context={"concerts": concerts, "emplacements": emplacements, "ticketLowerPrice": ticketLowerPrice})
+        emplacements = Ticket.objects.filter(event_id=concert, user__isnull=True).values('emplacement__name').distinct()
+        ticketLowerPrice = Ticket.objects.filter(event=concert, user__isnull=True).order_by('price').first()
+        return render(request, 'home/concerts.html', context={"concerts": concerts, "emplacements": emplacements, "ticketLowerPrice": ticketLowerPrice})
 
 def festivals(request):
     festivals = Festival.objects.all().order_by('startDate')

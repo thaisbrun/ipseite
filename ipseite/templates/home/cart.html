@@ -1,13 +1,42 @@
 {% extends 'base.html' %}
 {% block content %}
 {% for order in orders %}
-<p>{{ order.event.place }}
-    Quantité: {{order.quantity }}
-    Prix total : {{ order.line_total }}
-</p>
-<a href="{% url 'delete_orderFromCart' order.id %}"> Retirer de mon panier </a>
+<div class="container">
+    <br>
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'index' %}" style="color:#ab8ec2">Home</a></li>
+    <li class="breadcrumb-item active" style="font-family: Questrial,serif">Mon panier</li>
+  </ol>
+</nav>
+
+    <h2>Mon panier </h2>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Articles du panier</th>
+        <th></th>
+        <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="{{ order.event.image.url }}" width="200" height="210"></td>
+      <td class="col-6"> <!-- Nom artiste, nom concert et emplacement du ticket -->
+       <h3><b> {{ order.event.place }}</b></h3>
+          <br>
+          <i>Emplacement choisi : {{order.ticket.emplacement}}</i>
+            </td>
+      <td> <p>Quantité: {{order.quantity }} <i class="fa-solid fa-plus"></i> | <i class="fa-solid fa-plus"></i><br>
+          Prix total : {{ order.line_total }}<br></p>
+          <a href="{% url 'delete_orderFromCart' order.id %}"> Retirer de mon panier </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <br>
 {% endfor %}
 <p> Prix total du panier : </p>
 <a href="{% url 'delete_cart' %}"> Supprimer mon panier </a>
+</div>
 {% endblock %}

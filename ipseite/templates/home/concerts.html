@@ -20,7 +20,7 @@
        A partir de : {{ ticketLowerPrice.price }} euros
         <br>
     Emplacements dispos : {%for emplacement in emplacements %}
-        {{ emplacement.id }},
+              {{ emplacement.emplacement__name }}
         {% endfor %}
     </p>
     <a href="{% url 'event_detail' concert.slug %}" class="btn" style="background-color:#ab8ec2; color:whitesmoke">Ca m'intéresse</a>
