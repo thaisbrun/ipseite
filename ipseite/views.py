@@ -69,7 +69,7 @@ def concerts(request):
 def festivals(request):
     festivals = Festival.objects.all().order_by('startDate')
     for festival in festivals:
-        ticketLowerPrice = Ticket.objects.filter(event=festival).order_by('price').first()
+        ticketLowerPrice = Ticket.objects.filter(event=festival, user__isnull=True).order_by('price').first()
     return render(request, 'home/festivals.html', context={"festivals": festivals,
                                                            "ticketLowerPrice": ticketLowerPrice })
 
