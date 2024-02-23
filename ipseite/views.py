@@ -45,8 +45,9 @@ def add_to_cart(request):
     """Récupération ou création du panier """
     cart, _ = Cart.objects.get_or_create(user=user)
     order, created = Order.objects.get_or_create(user=user, ordered=False, event=event, ticket=ticket)
-    order.user = user
+
     if created:
+        order.user = user
         cart.orders.add(order)
         cart.save()
     else:
@@ -75,12 +76,11 @@ def festivals(request):
 def cart(request):
     try:
         cart = Cart.objects.get(id=request.user.cart.id)
-        #for order in cart.orders.all():
-            #totalPrice = sum(int(order.ticket.price))
+        total = sum(order.ticket.price * order.quantity for order in cart.orders.all())
     except Cart.DoesNotExist:
         return render(request,'home/cart.html')
     if request.user is not None:
-        return render(request, 'home/cart.html', context={"orders": cart.orders.all()})
+        return render(request, 'home/cart.html', context={"orders": cart.orders.all(), "total": total})
     else:
         return render(request, 'accounts/login.html')
 

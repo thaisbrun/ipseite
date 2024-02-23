@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for order in orders %}
+
 <div class="container">
     <br>
     <nav aria-label="breadcrumb">
@@ -11,6 +11,7 @@
 </nav>
 
     <h2>Mon panier </h2>
+
     <table class="table">
   <thead>
     <tr>
@@ -21,6 +22,7 @@
   </thead>
   <tbody>
     <tr>
+        {% for order in orders %}
       <td><img src="{{ order.event.image.url }}" width="200" height="210"></td>
       <td class="col-6"> <!-- Nom artiste, nom concert et emplacement du ticket -->
        <h3><b> {{ order.event.place }}</b></h3>
@@ -28,15 +30,16 @@
           <i>Emplacement choisi : {{order.ticket.emplacement}}</i>
             </td>
       <td> <p>Quantité: {{order.quantity }} <i class="fa-solid fa-plus"></i> | <i class="fa-solid fa-plus"></i><br>
-          Prix total : {{ order.line_total }}<br></p>
+          Prix : {{ order.line_total }}<br></p>
           <a href="{% url 'delete_orderFromCart' order.id %}"> Retirer de mon panier </a>
       </td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
 <br>
-{% endfor %}
-<p> Prix total du panier : </p>
+
+<p> Prix total du panier : {{total}}</p>
 <a href="{% url 'delete_cart' %}"> Supprimer mon panier </a>
 </div>
 {% endblock %}
