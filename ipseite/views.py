@@ -9,9 +9,9 @@ from ipseite.models import Artist, Concert, Festival, Evenement, Ticket, Cart, O
 # Create your views here.
 def index(request):
     artists = Artist.objects.all()
-    evenements = Evenement.objects.all().order_by('createDate')
-    concerts = Concert.objects.all().order_by('date')
-    festivals = Festival.objects.all().order_by('startDate')
+    evenements = Evenement.objects.all().order_by('createDate').annotate(nombre_tickets=Count('ticket'))
+    concerts = Concert.objects.all().order_by('date').annotate(nombre_tickets=Count('ticket'))
+    festivals = Festival.objects.all().order_by('startDate').annotate(nombre_tickets=Count('ticket'))
     return render(request, 'home/index.html',
                   context={"artists": artists, "concerts": concerts, "festivals": festivals, "evenements": evenements})
 

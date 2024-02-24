@@ -7,19 +7,21 @@
     <h3>Bientôt complet</h3></div>
   <div class="row align-items-start" style="margin-top:40px;">
       {% for concert in concerts %}
-      {% if concert.nbTickets < 10 %}
+      {% if concert.nombre_tickets < 10 and concert.nombre_tickets != 0 %}
       <div class="card" style="background-color: #f0e3fa; width: 20rem; margin:10px; border-color: #ab8ec2; border-width: medium;">
           <img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" style="margin-top: 10px">
   <div class="card-body">
       <a href="{% url 'event_detail' concert.slug %}" style="color:#ab8ec2"><h5 class="card-title">{{ concert.artist.name }} à {{concert.place }} </h5></a>
       <p class="card-text"><i>Le {{concert.date }}</i></p>
-      <p class="card-text">{{concert.description}}</p>
+      <p class="card-text">{{concert.description}}
+      <br> <b>Il ne reste plus que {{ concert.nombre_tickets }} places ! </b>
+      </p>
   </div>
 </div>{% else %}
       {% endif %}
       {% endfor %}
            {% for festival in festivals %}
-      {% if festival.nbTickets < 10 %}
+      {% if festival.nombre_tickets < 10 and festival.nombre_tickets != 0 %}
       <div class="card" style="background-color: #f0e3fa; width: 20rem; margin:10px;  border-color: #ab8ec2; border-width: medium;">
 <img src="{{ festival.image.url }}" alt="{{ festival.place }}" style="margin-top: 10px" >
   <div class="card-body">
@@ -45,6 +47,9 @@
       <a href="{% url 'event_detail' concert.slug %}" style="color:#ab8ec2; "><h5 class="card-title">{{ concert.artist.name }} à {{concert.place }} </h5></a>
       <p class="card-text"><i>Le {{concert.date }}</i></p>
       <p class="card-text">{{concert.description}}</p>
+      {% if concert.nombre_tickets is none %}
+      <b> COMPLET </b>
+      {% endif %}
   </div>
       </div>
       {% endfor %}
@@ -63,7 +68,11 @@
                     {%for artist in festival.artists.all %}
         {{ artist.name }}, {%endfor%} à {{festival.place }} </h5></a>
             <p class="card-text"><i>Du {{festival.startDate }} au {{ festival.finishDate }}</i></p>
-      <p class="card-text">{{festival.description}}</p>
+      <p class="card-text">{{festival.description}}      </p>
+            {% if concert.nombre_tickets is none %}
+      <p><b> COMPLET </b></p>
+      {% endif %}
+
   </div>
 </div>
       {% endfor %}
