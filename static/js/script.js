@@ -43,3 +43,14 @@ function validateUserForm() {
           return false;
   }
 }
+
+function ajouterQuantite() {
+  // Récupérer l'élément contenant la quantité
+  var champQuantite = document.getElementById("quantite");
+  // Récupérer la valeur actuelle de la quantité
+  var quantiteActuelle = parseInt(champQuantite.value);
+  // Incrémenter la quantité
+  var nouvelleQuantite = quantiteActuelle + 1;
+  // Mettre à jour la valeur affichée
+  champQuantite.value = nouvelleQuantite;
+}

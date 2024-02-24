@@ -2,6 +2,7 @@ from django.db.models import Count
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from datetime import date
 
 from ipseite.models import Artist, Concert, Festival, Evenement, Ticket, Cart, Order, Emplacement
 
@@ -45,9 +46,11 @@ def add_to_cart(request):
     """Récupération ou création du panier """
     cart, _ = Cart.objects.get_or_create(user=user)
     order, created = Order.objects.get_or_create(user=user, ordered=False, event=event, ticket=ticket)
-
+    order.ticket.user = user
+    order.ticket.createDate = date.today()
+    order.ticket.save()
     if created:
-        order.user = user
+        order.save()
         cart.orders.add(order)
         cart.save()
     else:
@@ -84,18 +87,39 @@ def cart(request):
     else:
         return render(request, 'accounts/login.html')
 
+def add_orderFromCart(request, id):
+    user = request.user
+    order = get_object_or_404(Order, id=id)
+    ticket = Ticket.objects.all().filter(event=order.event, emplacement=order.ticket.emplacement, user__isnull=True).first()
+    """Récupération ou création du panier """
+    order, created = Order.objects.get_or_create(user=user, ordered=False, event=order.event, ticket=ticket)
+    order.ticket.user = user
+    order.ticket.createDate = date.today()
+    order.ticket.save()
+    if order is not None:
+        if order.quantity != 0:
+            order.quantity += 1
+            order.ticket.user = request.user
+            order.save()
+            return redirect('cart')
+
 def delete_orderFromCart(request, id):
     order = Order.objects.get(id=id, user=request.user)
     if order is not None:
         if order.quantity == 1 and order.quantity != 0:
+            order.ticket.user = None
+            order.ticket.save()
             order.delete()
         else:
             order.quantity -= 1
+            order.ticket.user = None
+            order.ticket.save()
             order.save()
 
     return redirect('cart')
 def delete_cart(request):
     if cart := request.user.cart:
+       # cart.orders.delete()
         cart.delete()
     return redirect('index')
 

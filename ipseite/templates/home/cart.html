@@ -24,12 +24,13 @@
     <tr>
         {% for order in orders %}
       <td><img src="{{ order.event.image.url }}" width="200" height="210"></td>
-      <td class="col-6"> <!-- Nom artiste, nom concert et emplacement du ticket -->
+      <td class="col-6">
+          <!-- Nom artiste, nom concert et emplacement du ticket -->
        <h3><b> {{ order.event.place }}</b></h3>
           <br>
           <i>Emplacement choisi : {{order.ticket.emplacement}}</i>
             </td>
-      <td> <p>Quantité: {{order.quantity }} <i class="fa-solid fa-plus"></i> | <i class="fa-solid fa-plus"></i><br>
+      <td> <p>Quantité: {{order.quantity }} <a class="fa fa-plus" href="{% url 'add_orderFromCart' order.id %}"></a> | <a href="{% url 'delete_orderFromCart' order.id %}" class="fa fa-minus"></a><br>
           Prix : {{ order.line_total }}<br></p>
           <a href="{% url 'delete_orderFromCart' order.id %}"> Retirer de mon panier </a>
       </td>
@@ -39,7 +40,7 @@
 </table>
 <br>
     <div class="text-center">
-     <p>Prix total du panier : {{total}} &emsp;&emsp;
+     <p>Prix total du panier : {{total}} € &emsp;&emsp;
          <a class="btn" style="background-color:#ab8ec2; color:whitesmoke"> Passer au paiement </a></p>
     <br>
     </div>
