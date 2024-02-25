@@ -7,7 +7,10 @@ import stripe
 
 class HomePageView(TemplateView):
     template_name = 'home.html'
-
+class SuccessView(TemplateView):
+    template_name = 'success.html'
+class CancelledView(TemplateView):
+    template_name = 'cancelled.html'
 
 # new
 @csrf_exempt
@@ -32,18 +35,22 @@ def create_checkout_session(request):
 
             # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
             checkout_session = stripe.checkout.Session.create(
-                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + 'cancelled/',
                 payment_method_types=['card'],
-                mode='payment',
                 line_items=[
                     {
-                        'nom': 'Ticket',
-                        'quantite': 1,
-                        'devise': 'eur',
-                        'prix': '1000',
-                    }
-                ]
+                        'price_data': {
+                            'currency': 'eur',
+                            'unit_amount': 1000,
+                            'product_data': {
+                                'name': 'Ticket',
+                            },
+                        },
+                    'quantity': 1,
+                    },
+            ],
+                mode='payment',
+                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=domain_url + 'cancelled/',
             )
             return JsonResponse({'sessionId': checkout_session['id']})
         except Exception as e:
