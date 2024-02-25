@@ -61,7 +61,7 @@ fetch("/config/")
   // Initialize Stripe.js
   const stripe = Stripe(data.publicKey);
 // Event handler
-  document.querySelector("#submitBtn").addEventListener("click", () => {
+  document.querySelector("#paymentButton").addEventListener("click", () => {
     // Get Checkout Session ID
     fetch("/create-checkout-session/")
     .then((result) => { return result.json(); })
