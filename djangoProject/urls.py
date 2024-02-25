@@ -6,7 +6,7 @@ from django.urls import path, include
 from djangoProject import settings
 from ipseite.views import add_to_cart, event_detail, concerts, festivals, cart, delete_cart, delete_orderFromCart
 from accounts.views import signup, logout_user, login_user, my_account, delete_user
-
+from django.urls import path, include
 urlpatterns = [
                   path('admin/', admin.site.urls),
                   path('signup/', signup, name="signup"),
@@ -17,6 +17,7 @@ urlpatterns = [
                   path('concerts', concerts, name="concerts"),
                   path('festivals', festivals, name="festivals"),
                   path('', include('ipseite.urls')),
+                  path('', include('payments.urls')),  # new
                   path('event/<str:slug>', event_detail, name="event_detail"),
                   path('cart/', cart, name="cart"),
                   path('cart/delete', delete_cart, name="delete_cart"),

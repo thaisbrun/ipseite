@@ -21,7 +21,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-(oz2&nmr(o5kzabimkkz7zxdi%)a1oe$e8aopzc(cp(ofn6=jg'
-
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51OneF3HQCPmcK5PK6FnN2lrmbx1I6lrAsxZBfyIDGPnL7ikw92HJy7r4TrRsCZCBXAOezIeYfbS2TODqtsCeXk8B00gzx2xm8m'
+STRIPE_SECRET_KEY = 'sk_test_51OneF3HQCPmcK5PKJitDZZZwMPm3JdXJJol5VdbdCbXHik9me0BCMziqRiTAwnuFvPbBKm6evXdO6O9LXlMk1ffz005Yt10ZWm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ipseite.apps.HomeConfig',
+    'payments.apps.PaymentsConfig',
     'accounts',
     'debug_toolbar',
 ]
