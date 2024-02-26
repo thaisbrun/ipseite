@@ -42,10 +42,10 @@ def my_account(request):
         username = request.POST.get("username")
         User.objects.filter(id=request.user.id).update(first_name=first_name, last_name=last_name, email=email, username=username)
         return redirect('index')
-
     orders = Order.objects.filter(user=request.user).order_by('-orderDate')[:3]
+    total = sum(order.ticket.price * order.quantity for order in orders)
 
-    return render(request,'accounts/my_account.html',context={"orders": orders})
+    return render(request,'accounts/my_account.html',context={"orders": orders, "total":total})
 def logout_user(request):
     logout(request)
     return redirect('index')

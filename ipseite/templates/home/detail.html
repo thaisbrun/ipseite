@@ -31,7 +31,11 @@ list des emplacements dispo, prix -->
         <b> Prix : {{ticketLowerPrice.price }} euros </b>
         <br>
         <br>
+            {% if user.is_authenticated %}
             <button type="submit" class="btn" style="background-color:#ab8ec2; color:whitesmoke">Ajouter au panier</button>
+            {% else %}
+            <b> Vous devez être connecté pour acheter un billet. </b>
+            {% endif %}
         </form>
 
     </div>

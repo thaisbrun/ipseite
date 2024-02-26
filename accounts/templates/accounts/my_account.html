@@ -4,12 +4,12 @@
 <div class="container">
     <br>
 {% if user.is_authenticated %}
-        <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="{% url 'index' %}" style="color:#ab8ec2">Home</a></li>
-    <li class="breadcrumb-item active" style="font-family: Questrial,serif">Mon profil</li>
-  </ol>
-</nav>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'index' %}" style="color:#ab8ec2">Accueil</a></li>
+            <li class="breadcrumb-item active" style="font-family: Questrial,serif">Mon profil</li>
+        </ol>
+    </nav>
     <form method="POST" name="account_modification" onsubmit="return validateUserForm()" action="">
             {% csrf_token %}
         <h3> Mes informations de profil </h3>
@@ -48,15 +48,16 @@
             <br>
         {% for order in orders %}
     <div class="col-3">
+
         <p> <b>Commande n°{{order.id}}</b>
             <br>
             Passée le : {{ order.orderDate }}
             <br>
-        Envoyée à l'adresse : {{ order.user.email }}
+        Envoyée à l'adresse mail : {{ order.user.email }}
             <br>
         Quantité : {{ order.quantity }}
             <br>
-            Total : A coder
+            Total : {{ total }} €
             <br>
             Lieu : {{order.event.place}}
             <br>
@@ -65,11 +66,12 @@
     <div class="col-4">
             <img src="{{ order.event.image.url }}" width="150" height="160">
     </div>
+
         {% endfor %}
-          </div>
-        <br>
-<br>
+</div>
     </form>
+    <br>
+<br>
 </div>
 <br>
 {%endif %}

@@ -1,4 +1,4 @@
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
@@ -10,9 +10,9 @@ from ipseite.models import Artist, Concert, Festival, Evenement, Ticket, Cart, O
 # Create your views here.
 def index(request):
     artists = Artist.objects.all()
-    evenements = Evenement.objects.all().order_by('createDate').annotate(nombre_tickets=Count('ticket'))
-    concerts = Concert.objects.all().order_by('date').annotate(nombre_tickets=Count('ticket'))
-    festivals = Festival.objects.all().order_by('startDate').annotate(nombre_tickets=Count('ticket'))
+    evenements = Evenement.objects.all().order_by('createDate').annotate(nombre_tickets=Count('ticket', filter=Q(ticket__user__isnull=True)))
+    concerts = Concert.objects.all().order_by('date').annotate(nombre_tickets=Count('ticket', filter=Q(ticket__user__isnull=True)))
+    festivals = Festival.objects.all().order_by('startDate').annotate(nombre_tickets=Count('ticket', filter=Q(ticket__user__isnull=True)))
     return render(request, 'home/index.html',
                   context={"artists": artists, "concerts": concerts, "festivals": festivals, "evenements": evenements})
 
@@ -63,11 +63,14 @@ def ml(request):
 
 def concerts(request):
     concerts = Concert.objects.all().order_by('date')
-    tickets = Ticket.objects.all().order_by('createDate')
+
     for concert in concerts:
-        emplacements = Ticket.objects.filter(event_id=concert, user__isnull=True).values('emplacement__name').distinct()
-        ticketLowerPrice = Ticket.objects.filter(event=concert, user__isnull=True).order_by('price').first()
-        return render(request, 'home/concerts.html', context={"concerts": concerts, "emplacements": emplacements, "ticketLowerPrice": ticketLowerPrice})
+        emplacements = concert.ticket_set.filter(user__isnull=True).values('emplacement__name').distinct()
+        ticketLowerPrice = concert.ticket_set.filter(user__isnull=True).order_by('price').first()
+
+        return render(request, 'home/concerts.html', context={"concerts": concerts,
+                                                          'emplacements': emplacements,
+                                                          "ticketLowerPrice": ticketLowerPrice})
 
 def festivals(request):
     festivals = Festival.objects.all().order_by('startDate')

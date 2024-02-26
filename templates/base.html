@@ -29,9 +29,11 @@
           <a class="nav-link text-white" href="{% url 'festivals' %}">Festivals</a>
         </li>
       </ul>
+        {%  if user.is_authenticated %}
       <a class="nav-link text-white" href="{% url 'cart' %}">
           <i class="fa fa-shopping-basket" title="Mon panier"></i> Mon panier &emsp;
       </a>
+        {% endif %}
         {%  if not user.is_authenticated %}
           <a class="nav-link text-white" href="{% url 'signup' %}">
         Créer son compte
