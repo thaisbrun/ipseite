@@ -5,8 +5,6 @@ from django.views.generic.base import TemplateView
 import stripe
 
 
-class HomePageView(TemplateView):
-    template_name = 'home.html'
 class SuccessView(TemplateView):
     template_name = 'success.html'
 class CancelledView(TemplateView):
