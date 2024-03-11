@@ -15,9 +15,10 @@ list des emplacements dispo, prix -->
         <form action="/add_to_cart/" method="POST" >
             {% csrf_token %}
             <input name="slug" value="{{ evenement.slug }}" hidden>
-    <h2>{{evenement.artist.name }}</h2>
-        <h2>{% for artist in evenement.artists.all %}
-      {{ artist.name }} -
+    <h2>{{evenement.artist.name }}  {{ evenement.tour.name }}</h2>
+        <h2>{{evenement.name }}
+            {% for artist in evenement.artists.all %}
+      {{ artist.name }}
         {%endfor%}</h2>
         <h2>Le {{evenement.date }} {{ evenement.startDate }} à {{ evenement.place }}</h2>
         <p>{{ evenement.description }}</p>
@@ -30,6 +31,7 @@ list des emplacements dispo, prix -->
             {% endif %}
             <br>
         <h3 style="color:#ab8ec2"><b> Prix : {{ticketLowerPrice.price }} euros </b></h3>
+            {{ evenement.tour.description }}
         <br>
         <br>
             {% if user.is_authenticated %}
