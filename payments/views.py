@@ -38,9 +38,10 @@ def create_checkout_session(request):
                     {
                         'price_data': {
                             'currency': 'eur',
-                            'unit_amount': 1000,
+                            'unit_amount': 4500,
                             'product_data': {
-                                'name': 'Ticket',
+                                'name': 'Ticket Dinos STAMINA Zénith de Marseille',
+                             #   'images': ['./media/imagesEv/stamina.jpg'],
                             },
                         },
                     'quantity': 1,

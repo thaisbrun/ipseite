@@ -13,7 +13,7 @@
     {% for concert in concerts %}
   <div class="col-sm-6">
 <div class="card" style="background-color: #f0e3fa; margin:10px; border-color: #ab8ec2; border-width: medium;">
-  <img src="{{ concert.image.url }}" class="card-img-top" style="padding: 10px">
+  <img src="{{ concert.image.url }}" class="card-img-top" style="padding: 10px; width: 100%;height: 25vw; object-fit: cover;">
   <div class="card-body">
     <h4 class="card-title">{{ concert.artist.name }} - {{concert.tour.name }}</h4>
     <p class="card-text"> Concert à {{ concert.place }} le {{concert.date }} <br>

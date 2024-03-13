@@ -11,7 +11,7 @@ from ipseite.models import Artist, Concert, Festival, Evenement, Ticket, Cart, O
 def index(request):
     artists = Artist.objects.all()
     evenements = Evenement.objects.all().order_by('createDate').annotate(nombre_tickets=Count('ticket', filter=Q(ticket__user__isnull=True)))
-    concerts = Concert.objects.all().order_by('date','artist__name').annotate(nombre_tickets=Count('ticket', filter=Q(ticket__user__isnull=True)))
+    concerts = Concert.objects.all().order_by('-date','artist__name').annotate(nombre_tickets=Count('ticket', filter=Q(ticket__user__isnull=True)))
     festivals = Festival.objects.all().order_by('startDate').annotate(nombre_tickets=Count('ticket', filter=Q(ticket__user__isnull=True)))
     return render(request, 'home/index.html',
                   context={"artists": artists, "concerts": concerts, "festivals": festivals, "evenements": evenements})
@@ -29,7 +29,7 @@ def event_detail(request, slug):
                                                                 "ticketLowerPrice": ticketLowerPrice})
     for festival in festivals:
         if event.id == festival.id:
-            return render(request, 'home/detail.html', context={"evenement": festival})
+            return render(request, 'home/detail.html', context={"evenement": festival, "ticketLowerPrice": ticketLowerPrice})
 
 
 def add_to_cart(request):

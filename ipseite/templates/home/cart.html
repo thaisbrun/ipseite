@@ -30,9 +30,9 @@
           <br>
           <i>Emplacement choisi : {{order.ticket.emplacement}}</i>
             </td>
-      <td> <p>Quantité: {{order.quantity }} <a class="fa fa-plus" href="{% url 'add_orderFromCart' order.id %}"></a> | <a href="{% url 'delete_orderFromCart' order.id %}" class="fa fa-minus"></a><br>
+      <td> <p>Quantité: {{order.quantity }} <a style="color:#ab8ec2" class="fa fa-plus" href="{% url 'add_orderFromCart' order.id %}"></a> | <a style="color:#ab8ec2" href="{% url 'delete_orderFromCart' order.id %}" class="fa fa-minus"></a><br>
           Prix : {{ order.line_total }}<br></p>
-          <a href="{% url 'delete_orderFromCart' order.id %}"> Retirer de mon panier </a>
+          <a style="color:#ab8ec2" href="{% url 'delete_orderFromCart' order.id %}"> Retirer de mon panier </a>
       </td>
     </tr>
     {% endfor %}
