@@ -5,11 +5,11 @@
 <div class="container">
     <div class="row text-center" style="margin-top: 400px;background: #ab8ec2;">
     <h3>Bientôt complet</h3></div>
-  <div class="row align-items-start" style="margin-top:40px;">
+  <div class="row align-items-start justify-content-center" style="margin-top:40px;">
       {% for concert in concerts %}
       {% if concert.nombre_tickets < 10 and concert.nombre_tickets != 0 %}
       <div class="card" style="background-color: #f0e3fa; width: 20rem; margin:10px; border-color: #ab8ec2; border-width: medium;">
-          <img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" style="margin-top: 10px">
+          <img src="{{ concert.image.url }}" alt="{{ concert.tour.name }}" style="margin-top: 10px;width: 100%;height: 25vw; object-fit: cover;">
   <div class="card-body">
       <a href="{% url 'event_detail' concert.slug %}" style="color:#ab8ec2"><h5 class="card-title">{{ concert.artist.name }} à {{concert.place }} </h5></a>
       <p class="card-text"><i>Le {{concert.date }}</i></p>
