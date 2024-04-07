@@ -4,7 +4,7 @@ Aucun de mes projets sont en ligne actuellement, il s'agit de projets fictifs af
 
 Ma "méthodologie" de développement est commune à tous mes projets : 
 - Création des wireframes (avec Figma)
-- Création d'un tableau Kanban pour les tâches à effectuer (Trello)
+- Création d'un trello pour les tâches à effectuer 
 - Création du MCD (Umlet)
 - Création de la BDD (pour ce projet ci : SQLite)
 - Initialisation du projet et création des différentes fonctionnalités
